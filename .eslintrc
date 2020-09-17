@@ -1,0 +1,47 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": ["@typescript-eslint", "react"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "shorthandFirst": true,
+        "noSortAlphabetically": false,
+        "reservedFirst": true
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": { "@typescript-eslint/no-var-requires": "off" }
+    }
+  ]
+}
