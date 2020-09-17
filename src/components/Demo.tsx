@@ -30,6 +30,11 @@ const Demo: FC = () => {
     console.log(page);
   };
 
+  // TODO:
+  // 1. Add global disabled
+  // 2. Add aria-disabled when some element is disabled
+  // 3. Add corresponding aria to next and previous buttons
+
   return (
     <Paginator onPageChange={handlePageChange} pagesQuantity={5}>
       <Previous>
