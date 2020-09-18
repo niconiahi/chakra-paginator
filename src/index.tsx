@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { ChakraProvider } from "@chakra-ui/core";
 
 // components
-import Demo from "components/Demo";
+import Demo from "./Demo";
 
 // styles
 import "lib/styles.css";

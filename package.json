@@ -8,6 +8,11 @@
     "lint:fix": "yarn lint --fix",
     "type-check": "tsc"
   },
+  "files": [
+    "./src/components/*.tsx",
+    "./src/lib/providers/PaginatorProvider",
+    "./src/lib/helpers"
+  ],
   "name": "chakra-paginator",
   "version": "0.1.0",
   "dependencies": {
