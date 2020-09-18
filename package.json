@@ -8,31 +8,12 @@
     "lint:fix": "yarn lint --fix",
     "type-check": "tsc"
   },
-  "files": [
-    "./src/components/*.tsx",
-    "./src/lib/providers/PaginatorProvider",
-    "./src/lib/helpers"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "name": "chakra-paginator",
-  "keywords": [
-    "chakra",
-    "react",
-    "paginate",
-    "pagination",
-    "paginator"
-  ],
-  "repository": {
-    "url": "git@github.com:niconiahi/chakra-paginator.git"
-  },
   "version": "0.1.1",
   "dependencies": {
     "@chakra-ui/core": "^1.0.0-rc.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-icons": "^3.11.0",
     "react-scripts": "3.4.3"
   },
   "devDependencies": {
