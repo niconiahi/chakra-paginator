@@ -1,10 +1,15 @@
-import React, { FC } from "react";
-import { Flex, FlexProps } from "@chakra-ui/core";
+import React from "react";
+import { Flex, FlexProps, forwardRef } from "@chakra-ui/core";
 
-const PageGroup: FC<FlexProps> = ({ children, ...flexProps }) => (
-  <Flex {...flexProps} as="ol">
-    {children}
-  </Flex>
+const PageGroup = forwardRef<FlexProps, "ol">(
+  ({ children, ...flexProps }, ref) => {
+    console.log("flexProps", flexProps);
+    return (
+      <Flex ref={ref} as="ol" {...flexProps}>
+        {children}
+      </Flex>
+    );
+  }
 );
 
 export default PageGroup;

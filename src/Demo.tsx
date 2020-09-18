@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { ButtonProps, Button, Flex, Text } from "@chakra-ui/core";
+import { ButtonProps, Button, Flex } from "@chakra-ui/core";
 
 // components
 import Paginator from "components/Paginator";
@@ -44,7 +44,8 @@ const Demo: FC = () => {
         pagesQuantity={5}
       >
         <Previous>
-          <Text>Previous</Text>
+          Previous
+          {/* Or an icon from `react-icons` */}
         </Previous>
         <PageGroup>
           {generatePages(pagesQuantity)?.map((page: number) => (
@@ -57,7 +58,8 @@ const Demo: FC = () => {
           ))}
         </PageGroup>
         <Next>
-          <Text>Next</Text>
+          Next
+          {/* Or an icon from `react-icons` */}
         </Next>
       </Paginator>
       <Button ml={4} onClick={handleDisableClick}>
