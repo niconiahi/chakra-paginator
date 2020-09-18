@@ -23,6 +23,7 @@ const Page: FC<Props & ButtonProps> = ({
   const { changePage } = actions;
   const { currentPage, isDisabled } = state;
   const isCurrent = currentPage === page;
+  const pageLabel = page + 1;
 
   return (
     <>
@@ -39,7 +40,7 @@ const Page: FC<Props & ButtonProps> = ({
           {...buttonProps}
           {...activeStyles}
         >
-          {page}
+          {pageLabel}
         </Button>
       ) : (
         <Button
@@ -53,7 +54,7 @@ const Page: FC<Props & ButtonProps> = ({
           {...buttonProps}
           {...normalStyles}
         >
-          {page}
+          {pageLabel}
         </Button>
       )}
     </>

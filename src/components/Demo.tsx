@@ -37,11 +37,6 @@ const Demo: FC = () => {
   const handleDisableClick = () =>
     setIsPaginatorDisabled((oldState) => !oldState);
 
-  // TODO:
-  // 1. Add global disabled
-  // 2. Add aria-disabled when some element is disabled
-  // 3. Add corresponding aria to next and previous buttons
-
   return (
     <Flex p={4}>
       <Paginator

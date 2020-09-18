@@ -23,7 +23,7 @@ const Next: FC<ButtonProps> = ({ children, ...buttonProps }) => {
       onClick={handleNextClick}
       {...buttonProps}
       aria-label="Next page"
-      isDisabled={isLast}
+      isDisabled={isLast || isDisabled}
       {...(isLast || isDisabled ? { "aria-disabled": true } : {})}
     >
       {children}
