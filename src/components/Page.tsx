@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { useContext } from "react";
 import { Button, ButtonProps, forwardRef } from "@chakra-ui/core";
 
 // lib
