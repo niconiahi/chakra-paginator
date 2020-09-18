@@ -10,7 +10,7 @@ const Next: FC<ButtonProps> = ({ children, ...buttonProps }) => {
 
   // constants
   const { changePage } = actions;
-  const { currentPage, pagesQuantity } = state;
+  const { currentPage, pagesQuantity, isDisabled } = state;
   const isLast = currentPage > pagesQuantity - 1;
 
   // handlers
@@ -19,7 +19,13 @@ const Next: FC<ButtonProps> = ({ children, ...buttonProps }) => {
   };
 
   return (
-    <Button onClick={handleNextClick} {...buttonProps} isDisabled={isLast}>
+    <Button
+      onClick={handleNextClick}
+      {...buttonProps}
+      aria-label="Next page"
+      isDisabled={isLast}
+      {...(isLast || isDisabled ? { "aria-disabled": true } : {})}
+    >
       {children}
     </Button>
   );

@@ -1,12 +1,10 @@
 import React, { FC } from "react";
-import { Flex, FlexProps, Box } from "@chakra-ui/core";
+import { Flex, FlexProps } from "@chakra-ui/core";
 
 const PageGroup: FC<FlexProps> = ({ children, ...flexProps }) => (
-  <Box aria-label="pagination navigation" as="nav">
-    <Flex {...flexProps} as="ol">
-      {children}
-    </Flex>
-  </Box>
+  <Flex {...flexProps} as="ol">
+    {children}
+  </Flex>
 );
 
 export default PageGroup;

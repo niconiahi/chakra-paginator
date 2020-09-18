@@ -21,7 +21,7 @@ const Page: FC<Props & ButtonProps> = ({
 
   // constants
   const { changePage } = actions;
-  const { currentPage } = state;
+  const { currentPage, isDisabled } = state;
   const isCurrent = currentPage === page;
 
   return (
@@ -33,7 +33,9 @@ const Page: FC<Props & ButtonProps> = ({
           as="li"
           minW="auto"
           onClick={() => changePage(page)}
+          pointerEvents={isDisabled ? "none" : "auto"}
           px={1}
+          {...(isDisabled ? { "aria-disabled": true } : {})}
           {...buttonProps}
           {...activeStyles}
         >
@@ -45,7 +47,9 @@ const Page: FC<Props & ButtonProps> = ({
           as="li"
           minW="auto"
           onClick={() => changePage(page)}
+          pointerEvents={isDisabled ? "none" : "auto"}
           px={1}
+          {...(isDisabled ? { "aria-disabled": true } : {})}
           {...buttonProps}
           {...normalStyles}
         >

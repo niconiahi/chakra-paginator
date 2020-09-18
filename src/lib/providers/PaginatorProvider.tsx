@@ -4,6 +4,7 @@ import React, {
   createContext,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from "react";
 
 type PaginatorContextValues = {
@@ -37,17 +38,28 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
 type Props = {
   pagesQuantity: number;
   onPageChange: (page: number) => void;
+  isDisabled: boolean;
 };
 
 export const PaginatorProvider: FC<Props> = ({
   children,
   pagesQuantity: pagesQuantityProp,
   onPageChange,
+  isDisabled: isDisabledProp,
 }) => {
   // states
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [pagesQuantity, setPagesQuantity] = useState<number>(pagesQuantityProp);
+  const [pagesQuantity, setPagesQuantity] = useState<number>(0);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
+  // effects
+  useEffect(() => {
+    setIsDisabled(isDisabledProp);
+  }, [isDisabledProp]);
+
+  useEffect(() => {
+    setPagesQuantity(pagesQuantityProp);
+  }, [pagesQuantityProp]);
 
   // handlers
   const changePage = (page: number) => {
