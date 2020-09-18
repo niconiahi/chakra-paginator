@@ -13,6 +13,9 @@
     "./src/lib/providers/PaginatorProvider",
     "./src/lib/helpers"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "name": "chakra-paginator",
   "keywords": [
     "chakra",
