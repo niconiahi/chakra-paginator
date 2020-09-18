@@ -14,6 +14,16 @@
     "./src/lib/helpers"
   ],
   "name": "chakra-paginator",
+  "keywords": [
+    "chakra",
+    "react",
+    "paginate",
+    "pagination",
+    "paginator"
+  ],
+  "repository": {
+    "url": "git@github.com:niconiahi/chakra-paginator.git"
+  },
   "version": "0.1.1",
   "dependencies": {
     "@chakra-ui/core": "^1.0.0-rc.3",
