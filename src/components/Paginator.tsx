@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Flex, FlexProps, forwardRef } from "@chakra-ui/core";
 
 // lib
@@ -10,7 +10,7 @@ type Props = {
   isDisabled: boolean;
 };
 
-const Paginator = forwardRef<Props & FlexProps, "nav">(
+export const Paginator = forwardRef<Props & FlexProps, "nav">(
   (
     { children, pagesQuantity, isDisabled, onPageChange, ...flexProps },
     ref
@@ -31,5 +31,3 @@ const Paginator = forwardRef<Props & FlexProps, "nav">(
     </PaginatorProvider>
   )
 );
-
-export default Paginator;

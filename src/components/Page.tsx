@@ -11,7 +11,7 @@ type Props = {
 };
 
 // const Page: FC<Props & ButtonProps> = ({
-const Page = forwardRef<Props & ButtonProps, "li">(
+export const Page = forwardRef<Props & ButtonProps, "li">(
   ({ page, normalStyles, activeStyles, ...buttonProps }, ref) => {
     // react hooks
     const { actions, state } = useContext(PaginatorContext);
@@ -60,5 +60,3 @@ const Page = forwardRef<Props & ButtonProps, "li">(
     );
   }
 );
-
-export default Page;

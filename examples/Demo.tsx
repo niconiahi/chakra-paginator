@@ -2,17 +2,20 @@ import React, { FC, useState } from "react";
 import { ButtonProps, Button, Flex } from "@chakra-ui/core";
 
 // components
-import Paginator from "components/Paginator";
-import Previous from "components/Previous";
-import Page from "components/Page";
-import Next from "components/Next";
-import PageGroup from "components/PageGroup";
+import { Paginator } from "components/Paginator";
+import { Previous } from "components/Previous";
+import { Page } from "components/Page";
+import { Next } from "components/Next";
+import { PageGroup } from "components/PageGroup";
 import { generatePages } from "lib/helpers";
 
 const Demo: FC = () => {
   const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
     false
   );
+
+  // Calculated or obtained from Backend
+  const pagesQuantity = 6;
 
   // styles
   const normalStyles = {
@@ -25,11 +28,9 @@ const Demo: FC = () => {
     bg: "green.300",
   };
 
-  // Calculated or obtained from Backend
-  const pagesQuantity = 6;
-
-  // handler
+  // handlers
   const handlePageChange = (page: number) => {
+    // Request new data using the page number
     console.log(page);
   };
 

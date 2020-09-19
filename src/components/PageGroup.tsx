@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, FlexProps, forwardRef } from "@chakra-ui/core";
 
-const PageGroup = forwardRef<FlexProps, "ol">(
+export const PageGroup = forwardRef<FlexProps, "ol">(
   ({ children, ...flexProps }, ref) => {
     console.log("flexProps", flexProps);
     return (
@@ -11,5 +11,3 @@ const PageGroup = forwardRef<FlexProps, "ol">(
     );
   }
 );
-
-export default PageGroup;

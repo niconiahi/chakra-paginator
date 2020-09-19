@@ -1,10 +1,10 @@
-import React, { FC, useContext } from "react";
+import React, { useContext } from "react";
 import { Button, ButtonProps, forwardRef } from "@chakra-ui/core";
 
 // lib
 import { PaginatorContext } from "lib/providers/PaginatorProvider";
 
-const Next = forwardRef<ButtonProps, "button">(
+export const Next = forwardRef<ButtonProps, "button">(
   ({ children, ...buttonProps }, ref) => {
     // react hooks
     const { actions, state } = useContext(PaginatorContext);
@@ -33,5 +33,3 @@ const Next = forwardRef<ButtonProps, "button">(
     );
   }
 );
-
-export default Next;

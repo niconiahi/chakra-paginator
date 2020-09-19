@@ -4,7 +4,7 @@ import { Button, ButtonProps, forwardRef } from "@chakra-ui/core";
 // lib
 import { PaginatorContext } from "lib/providers/PaginatorProvider";
 
-const Previous = forwardRef<ButtonProps, "button">(
+export const Previous = forwardRef<ButtonProps, "button">(
   ({ children, ...buttonProps }, ref) => {
     // react hooks
     const { actions, state } = useContext(PaginatorContext);
@@ -33,5 +33,3 @@ const Previous = forwardRef<ButtonProps, "button">(
     );
   }
 );
-
-export default Previous;

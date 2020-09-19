@@ -1,15 +1,39 @@
 {
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "build": "rollup --config rollup.config.js",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx",
+    "prepublish": "yarn build",
     "lint:fix": "yarn lint --fix",
+    "publish": "np",
+    "preview": "np preview",
     "type-check": "tsc"
   },
+  "np": {
+    "tests": false,
+    "yarn": false,
+    "contents": "./dist/chakra-paginator.js"
+  },
+  "main": "dist/chakra-paginator.js",
+  "homepage": "https://github.com/niconiahi/chakra-paginator",
   "name": "chakra-paginator",
-  "version": "0.1.1",
+  "keywords": [
+    "chakra-ui",
+    "react",
+    "paginator",
+    "pagination",
+    "chakra-paginator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:niconiahi/chakra-paginator.git"
+  },
+  "version": "0.1.2",
+  "author": {
+    "name": "Nicolas Accetta",
+    "email": "nicolas.accetta@gmail.com",
+    "url": "https://github.com/niconiahi/"
+  },
   "dependencies": {
     "@chakra-ui/core": "^1.0.0-rc.3",
     "react": "^16.13.1",
@@ -28,6 +52,11 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
+    "rollup": "^2.27.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "typescript": "~4.0.2"
   },
   "husky": {
