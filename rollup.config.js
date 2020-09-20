@@ -1,7 +1,8 @@
-import resolve from "rollup-plugin-node-resolve";
-import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
-import { uglify } from "rollup-plugin-uglify";
+import resolve from "@rollup/plugin-node-resolve";
+import babel from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
+import { terser } from "rollup-plugin-terser";
+import typescript from '@rollup/plugin-typescript'
 
 const PACKAGE_NAME = "chakra-paginator";
 const ENTRY_FILE = "./src/index.ts";
@@ -15,6 +16,6 @@ export default [
       format: "cjs",
       name: PACKAGE_NAME,
     },
-    plugins: [resolve(), babel(), commonjs(), uglify()],
+    plugins: [resolve(), babel(), commonjs(), terser(), typescript()],
   },
 ];
