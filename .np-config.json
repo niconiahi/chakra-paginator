@@ -1,5 +1,4 @@
 {
   "tests": false,
-  "yarn": false,
-  "contents": "./dist/chakra-paginator.js"
+  "contents": "./dist"
 }
