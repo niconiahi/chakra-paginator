@@ -9,11 +9,6 @@
     "preview": "np preview",
     "type-check": "tsc"
   },
-  "np": {
-    "tests": false,
-    "yarn": false,
-    "contents": "./dist/chakra-paginator.js"
-  },
   "main": "dist/chakra-paginator.js",
   "homepage": "https://github.com/niconiahi/chakra-paginator",
   "name": "chakra-paginator",
