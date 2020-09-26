@@ -7,7 +7,7 @@ import React, {
   useEffect,
 } from "react";
 
-type PaginatorContextValues = {
+export type PaginatorContextValues = {
   state: {
     currentPage: number;
     pagesQuantity: number;
@@ -35,13 +35,13 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
   },
 });
 
-type Props = {
+type PaginatorProviderProps = {
   pagesQuantity: number;
   onPageChange: (page: number) => void;
   isDisabled: boolean;
 };
 
-export const PaginatorProvider: FC<Props> = ({
+export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   children,
   pagesQuantity: pagesQuantityProp,
   onPageChange,

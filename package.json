@@ -5,11 +5,16 @@
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx",
     "prepublish": "yarn build",
     "lint:fix": "yarn lint --fix",
-    "upload": "yarn build && np",
+    "types": "tsc -d --declarationDir './dist/chakra-paginator.d.ts' --downlevelIteration src/**/*.ts",
+    "upload": "yarn build && yarn types && np",
     "preview": "np preview",
     "type-check": "tsc"
   },
-  "main": "dist/chakra-paginator.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "src/**/*.{ts,tsx}"
+  ],
   "homepage": "https://github.com/niconiahi/chakra-paginator",
   "name": "chakra-paginator",
   "keywords": [

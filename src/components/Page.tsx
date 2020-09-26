@@ -4,14 +4,14 @@ import { Button, ButtonProps, forwardRef } from "@chakra-ui/core";
 // lib
 import { PaginatorContext } from "lib/providers/PaginatorProvider";
 
-type Props = {
+export type PageProps = {
   page: number;
   normalStyles: ButtonProps;
   activeStyles: ButtonProps;
 };
 
 // const Page: FC<Props & ButtonProps> = ({
-export const Page = forwardRef<Props & ButtonProps, "li">(
+export const Page = forwardRef<PageProps & ButtonProps, "li">(
   ({ page, normalStyles, activeStyles, ...buttonProps }, ref) => {
     // react hooks
     const { actions, state } = useContext(PaginatorContext);

@@ -11,11 +11,13 @@
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": "src",
+    "declaration": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "outDir": "./dist",
     "jsx": "react"
   },
-  "include": ["src", "examples"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
