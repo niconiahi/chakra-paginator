@@ -10,8 +10,8 @@
     "preview": "np preview",
     "type-check": "tsc"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/chakra-paginator.js",
+  "types": "dist/chakra-paginator.d.ts",
   "files": [
     "src/**/*.{ts,tsx}"
   ],
