@@ -4,7 +4,6 @@
     "build": "rollup --config rollup.config.js",
     "prebuild": "rm -rf dist",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx",
-    "prepublish": "yarn build",
     "lint:fix": "yarn lint --fix",
     "types": "tsc -d --declarationDir './dist/chakra-paginator.d.ts' --downlevelIteration src/**/*.ts",
     "upload": "yarn build && np",
