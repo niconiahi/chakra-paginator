@@ -31,7 +31,7 @@
     "type": "git",
     "url": "git@github.com:niconiahi/chakra-paginator.git"
   },
-  "version": "0.1.6-0",
+  "version": "0.1.6",
   "author": {
     "name": "Nicolas Accetta",
     "email": "nicolas.accetta@gmail.com",
