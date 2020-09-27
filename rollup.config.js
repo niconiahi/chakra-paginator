@@ -1,10 +1,11 @@
 import resolve from "@rollup/plugin-node-resolve";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
 
-const PACKAGE_NAME = "chakra-paginator";
+const PACKAGE_NAME = "index";
 const ENTRY_FILE = "./src/index.ts";
 const OUTPUT_DIR = "./dist";
 
@@ -17,25 +18,21 @@ export default [
         format: "cjs",
         exports: "named",
         name: PACKAGE_NAME,
-        sourcemap: true,
       },
       {
         file: `${OUTPUT_DIR}/${PACKAGE_NAME}.js`,
-        format: "es",
+        format: "esm",
         exports: "named",
         name: PACKAGE_NAME,
-        sourcemap: true,
       },
     ],
     plugins: [
-      typescript({
-        rollupCommonJSResolveHack: false,
-        clean: true,
-      }),
+      peerDepsExternal(),
       resolve(),
-      babel(),
+      babel({ inputSourceMap: true }),
       commonjs(),
       terser(),
+      typescript(),
     ],
   },
 ];

@@ -2,12 +2,12 @@ import React, { FC, useState } from "react";
 import { ButtonProps, Button, Flex } from "@chakra-ui/core";
 
 // components
-import { Paginator } from "components/Paginator";
-import { Previous } from "components/Previous";
-import { Page } from "components/Page";
-import { Next } from "components/Next";
-import { PageGroup } from "components/PageGroup";
-import { generatePages } from "lib/helpers";
+import { Paginator } from "../src/components/Paginator";
+import { Previous } from "../src/components/Previous";
+import { Page } from "../src/components/Page";
+import { Next } from "../src/components/Next";
+import { PageGroup } from "../src/components/PageGroup";
+import { generatePages } from "../src/lib/helpers";
 
 const Demo: FC = () => {
   const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(

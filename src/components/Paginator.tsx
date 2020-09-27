@@ -2,7 +2,7 @@ import React from "react";
 import { Flex, FlexProps, forwardRef } from "@chakra-ui/core";
 
 // lib
-import { PaginatorProvider } from "lib/providers/PaginatorProvider";
+import { PaginatorProvider } from "../lib/providers/PaginatorProvider";
 
 export type PaginatorProps = {
   pagesQuantity: number;

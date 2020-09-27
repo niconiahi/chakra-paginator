@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Button, ButtonProps, forwardRef } from "@chakra-ui/core";
 
 // lib
-import { PaginatorContext } from "lib/providers/PaginatorProvider";
+import { PaginatorContext } from "../lib/providers/PaginatorProvider";
 
 export type PageProps = {
   page: number;

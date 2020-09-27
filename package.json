@@ -2,16 +2,20 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup --config rollup.config.js",
+    "prebuild": "rm -rf dist",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx",
     "prepublish": "yarn build",
     "lint:fix": "yarn lint --fix",
     "types": "tsc -d --declarationDir './dist/chakra-paginator.d.ts' --downlevelIteration src/**/*.ts",
-    "upload": "yarn build && yarn types && np",
+    "upload": "yarn build && np",
     "preview": "np preview",
     "type-check": "tsc"
   },
-  "main": "dist/chakra-paginator.js",
-  "types": "dist/chakra-paginator.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typescript": {
+    "definition": "./dist/index.d.ts"
+  },
   "files": [
     "src/**/*.{ts,tsx}"
   ],
@@ -34,13 +38,14 @@
     "email": "nicolas.accetta@gmail.com",
     "url": "https://github.com/niconiahi/"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@chakra-ui/core": "^1.0.0-rc.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"
   },
   "devDependencies": {
+    "@chakra-ui/core": "^1.0.0-rc.3",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
@@ -55,7 +60,11 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3",
     "rollup": "^2.27.1",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.3",
     "typescript": "~4.0.2"
