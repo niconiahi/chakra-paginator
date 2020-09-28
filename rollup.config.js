@@ -21,7 +21,7 @@ export default [
       },
       {
         file: `${OUTPUT_DIR}/${PACKAGE_NAME}.js`,
-        format: "esm",
+        format: "es",
         exports: "named",
         name: PACKAGE_NAME,
       },
