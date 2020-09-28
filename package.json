@@ -11,9 +11,6 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "typescript": {
-    "definition": "./dist/index.d.ts"
-  },
   "homepage": "https://github.com/niconiahi/chakra-paginator",
   "name": "chakra-paginator",
   "keywords": [
