@@ -9,5 +9,5 @@ src
 .prettierignore
 package.json
 README.md
-rollup.config.json
+rollup.config.js
 tsconfig.json
