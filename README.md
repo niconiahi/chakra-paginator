@@ -45,7 +45,7 @@ const Component = () => {
     <Paginator
       isDisabled={isPaginatorDisabled}
       onPageChange={handlePageChange}
-      pagesQuantity={5}
+      pagesQuantity={pagesQuantity}
     >
       <Previous>
         Previous
