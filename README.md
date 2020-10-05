@@ -21,12 +21,22 @@ yarn add chakra-paginator
 ## Usage
 
 ```js
+import { ButtonProps } from "@chakra-ui/core";
+import {
+  Paginator,
+  Previous,
+  Page,
+  Next,
+  PageGroup,
+  generatePages,
+} from "chakra-paginator";
+
 const Component = () => {
   // Calculated or obtained from Backend
   const pagesQuantity = 6;
 
   // styles
-  const normalStyles = {
+  const normalStyles: ButtonProps = {
     color: "green.300",
     bg: "red.300",
   };
