@@ -18,6 +18,10 @@ npm i chakra-paginator
 yarn add chakra-paginator
 ```
 
+## Demo
+
+[Check it out in a this Sandbox](https://codesandbox.io/s/suspicious-matsumoto-4n2gd)
+
 ## Usage
 
 ```js
