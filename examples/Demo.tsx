@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { ButtonProps, Button, Flex } from "@chakra-ui/core";
+import { ButtonProps, Button, Flex } from "@chakra-ui/react";
 
 // components
 import { Paginator } from "../src/components/Paginator";

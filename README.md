@@ -21,7 +21,7 @@ yarn add chakra-paginator
 ## Usage
 
 ```js
-import { ButtonProps } from "@chakra-ui/core";
+import { ButtonProps } from "@chakra-ui/react";
 import {
   Paginator,
   Previous,

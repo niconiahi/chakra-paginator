@@ -31,14 +31,20 @@
     "url": "https://github.com/niconiahi/"
   },
   "peerDependencies": {
-    "@chakra-ui/core": "^1.0.0-rc.3",
+    "@chakra-ui/react": "^1.1.2",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "framer-motion": "^3.1.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"
   },
   "devDependencies": {
-    "@chakra-ui/core": "^1.0.0-rc.3",
     "@rollup/plugin-babel": "^5.2.1",
+    "@chakra-ui/react": "^1.1.2",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "framer-motion": "^3.1.4",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@types/react": "^16.9.49",
