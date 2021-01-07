@@ -25,7 +25,7 @@ yarn add chakra-paginator
 ## Usage
 
 ```js
-import { ButtonProps } from "@chakra-ui/core";
+import { ButtonProps } from "@chakra-ui/react";
 import {
   Paginator,
   Previous,
@@ -84,10 +84,21 @@ const Component = () => {
 };
 ```
 
-## API
+## Components API
 
-| Prop          | Description                                                                                                                                                  | Type    | Default |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | ------- |
-| currentPage   | The current active page                                                                                                                                      | number  | 0       |
-| pagesQuantity | The total number of pages, calculated based on Backend data                                                                                                  | number  | 0       |
-| isDisabled    | Disables all of the pagination components. You can always disable each individual component via the _isDisabled_ prop, as the components render HTML buttons | boolean | false   |
+### Paginator
+
+| Prop          | Description                                                                                                                                                | Type                          | Default | Required |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------- | -------- |
+| pagesQuantity | The total number of pages, calculated based on Backend data                                                                                                | number                        | 0       | yes      |
+| isDisabled    | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                       | false   | no       |
+| onPageChange  | On change handler which returns the last selected page                                                                                                     | (currentPage: number) => void | -       | yes      |
+
+### Page
+
+| Prop         | Description                                                                                                                                                                                                                         | Type        | Default | Required |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------- | -------- |
+| key          | This is not strictly related to the library but never forget to pass it down to the component                                                                                                                                       | string      | -       | yes      |
+| activeStyles | The styles of the active page button                                                                                                                                                                                                | ButtonProps | -       | no       |
+| normalStyles | The styles of the inactive page buttons                                                                                                                                                                                             | ButtonProps | -       | no       |
+| page         | Number used internally which is returned on the <b>onPageChange</b> handler when selecting the page <br> <br> For now use the <b>generatePages</b> helper with which you shouldn't have any problems. This may change in the future | number      | -       | yes      |

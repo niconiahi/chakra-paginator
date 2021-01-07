@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, ButtonProps, forwardRef } from "@chakra-ui/core";
+import { Button, ButtonProps, forwardRef } from "@chakra-ui/react";
 
 // lib
 import { PaginatorContext } from "../lib/providers/PaginatorProvider";
