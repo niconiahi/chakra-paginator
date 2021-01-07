@@ -20,6 +20,9 @@
     "pagination",
     "chakra-paginator"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:niconiahi/chakra-paginator.git"
