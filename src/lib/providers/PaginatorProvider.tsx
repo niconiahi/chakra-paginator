@@ -6,11 +6,16 @@ import React, {
   SetStateAction,
   useEffect,
 } from "react";
+import { ButtonProps } from "@chakra-ui/react";
 
 export type PaginatorContextValues = {
   state: {
     currentPage: number;
     pagesQuantity: number;
+    outerLimit: number;
+    activeStyles: ButtonProps;
+    normalStyles: ButtonProps;
+    innerLimit: number;
     isDisabled: boolean;
   };
   actions: {
@@ -24,6 +29,10 @@ export type PaginatorContextValues = {
 export const PaginatorContext = createContext<PaginatorContextValues>({
   state: {
     currentPage: 0,
+    activeStyles: {},
+    normalStyles: {},
+    innerLimit: 0,
+    outerLimit: 0,
     pagesQuantity: 0,
     isDisabled: false,
   },
@@ -37,6 +46,10 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
 
 type PaginatorProviderProps = {
   pagesQuantity: number;
+  normalStyles: ButtonProps;
+  activeStyles: ButtonProps;
+  innerLimit: number;
+  outerLimit: number;
   onPageChange: (page: number) => void;
   isDisabled: boolean;
 };
@@ -44,10 +57,16 @@ type PaginatorProviderProps = {
 export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   children,
   pagesQuantity: pagesQuantityProp,
+  innerLimit: innerLimitProp,
+  outerLimit: outerLimitProp,
+  normalStyles,
+  activeStyles,
   onPageChange,
   isDisabled: isDisabledProp,
 }) => {
   // states
+  const [innerLimit, setInnerLimit] = useState<number>(0);
+  const [outerLimit, setOuterLimit] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [pagesQuantity, setPagesQuantity] = useState<number>(0);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -61,13 +80,30 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
     setPagesQuantity(pagesQuantityProp);
   }, [pagesQuantityProp]);
 
+  useEffect(() => {
+    setInnerLimit(innerLimitProp);
+  }, [innerLimitProp]);
+
+  useEffect(() => {
+    setOuterLimit(outerLimitProp);
+  }, [outerLimitProp]);
+
   // handlers
   const changePage = (page: number) => {
     setCurrentPage(page);
     onPageChange(page);
   };
 
-  const state = { currentPage, pagesQuantity, isDisabled };
+  const state = {
+    currentPage,
+    pagesQuantity,
+    normalStyles,
+    activeStyles,
+    isDisabled,
+    innerLimit,
+    outerLimit,
+  };
+
   const actions = {
     setCurrentPage,
     setPagesQuantity,

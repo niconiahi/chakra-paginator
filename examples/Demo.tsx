@@ -4,10 +4,8 @@ import { ButtonProps, Button, Flex } from "@chakra-ui/react";
 // components
 import { Paginator } from "../src/components/Paginator";
 import { Previous } from "../src/components/Previous";
-import { Page } from "../src/components/Page";
 import { Next } from "../src/components/Next";
 import { PageGroup } from "../src/components/PageGroup";
-import { generatePages } from "../src/lib/helpers";
 
 const Demo: FC = () => {
   const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
@@ -29,9 +27,9 @@ const Demo: FC = () => {
   };
 
   // handlers
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (currentPage: number) => {
     // Request new data using the page number
-    console.log(page);
+    console.log(currentPage);
   };
 
   const handleDisableClick = () =>
@@ -40,27 +38,22 @@ const Demo: FC = () => {
   return (
     <Flex p={4}>
       <Paginator
+        activeStyles={activeStyles}
+        innerLimit={2}
         isDisabled={isPaginatorDisabled}
+        normalStyles={normalStyles}
         onPageChange={handlePageChange}
-        pagesQuantity={5}
+        outerLimit={2}
+        pagesQuantity={pagesQuantity}
       >
         <Previous>
           Previous
-          {/* Or an icon from `react-icons` */}
+          {/* Or an icon from `react-icons` library */}
         </Previous>
-        <PageGroup>
-          {generatePages(pagesQuantity)?.map((page: number) => (
-            <Page
-              key={`paginator_page_${page}`}
-              activeStyles={activeStyles}
-              normalStyles={normalStyles}
-              page={page}
-            />
-          ))}
-        </PageGroup>
+        <PageGroup />
         <Next>
           Next
-          {/* Or an icon from `react-icons` */}
+          {/* Or an icon from `react-icons` library */}
         </Next>
       </Paginator>
       <Button ml={4} onClick={handleDisableClick}>
