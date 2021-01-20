@@ -16,7 +16,7 @@ const Demo: FC = () => {
   const pagesQuantity = 20;
 
   // styles
-  const normalStyles = {
+  const normalStyles: ButtonProps = {
     color: "green.300",
     bg: "red.300",
   };
