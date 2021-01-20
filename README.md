@@ -21,19 +21,21 @@ yarn add chakra-paginator
 ## Usage
 
 ```js
-import { ButtonProps } from "@chakra-ui/react";
-import {
-  Paginator,
-  Previous,
-  Page,
-  Next,
-  PageGroup,
-  generatePages,
-} from "chakra-paginator";
+import React, { FC, useState } from "react";
+import { ButtonProps, Button, Flex } from "@chakra-ui/react";
 
-const Component = () => {
+// components
+import { Paginator } from "../src/components/Paginator";
+import { Previous } from "../src/components/Previous";
+import { Next } from "../src/components/Next";
+import { PageGroup } from "../src/components/PageGroup";
+
+const Demo: FC = () => {
+  const [isPaginatorDisabled, setIsPaginatorDisabled] =
+    useState < boolean > false;
+
   // Calculated or obtained from Backend
-  const pagesQuantity = 6;
+  const pagesQuantity = 20;
 
   // styles
   const normalStyles: ButtonProps = {
@@ -47,37 +49,43 @@ const Component = () => {
   };
 
   // handlers
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (currentPage: number) => {
     // Request new data using the page number
+    console.log(currentPage);
   };
 
+  const handleDisableClick = () =>
+    setIsPaginatorDisabled((oldState) => !oldState);
+
   return (
-    <Paginator
-      isDisabled={isPaginatorDisabled}
-      onPageChange={handlePageChange}
-      pagesQuantity={pagesQuantity}
-    >
-      <Previous>
-        Previous
-        {/* i.e. an icon from `react-icons` */}
-      </Previous>
-      <PageGroup>
-        {generatePages(pagesQuantity)?.map((page: number) => (
-          <Page
-            key={`paginator_page_${page}`}
-            activeStyles={activeStyles}
-            normalStyles={normalStyles}
-            page={page}
-          />
-        ))}
-      </PageGroup>
-      <Next>
-        Next
-        {/* i.e. an icon from `react-icons` */}
-      </Next>
-    </Paginator>
+    <Flex p={4}>
+      <Paginator
+        activeStyles={activeStyles}
+        innerLimit={2}
+        isDisabled={isPaginatorDisabled}
+        normalStyles={normalStyles}
+        onPageChange={handlePageChange}
+        outerLimit={2}
+        pagesQuantity={pagesQuantity}
+      >
+        <Previous>
+          Previous
+          {/* Or an icon from `react-icons` library */}
+        </Previous>
+        <PageGroup />
+        <Next>
+          Next
+          {/* Or an icon from `react-icons` library */}
+        </Next>
+      </Paginator>
+      <Button ml={4} onClick={handleDisableClick}>
+        Disable ON / OFF
+      </Button>
+    </Flex>
   );
 };
+
+export default Demo;
 ```
 
 ## Components API
@@ -87,14 +95,9 @@ const Component = () => {
 | Prop          | Description                                                                                                                                                | Type                          | Default | Required |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------- | -------- |
 | pagesQuantity | The total number of pages, calculated based on Backend data                                                                                                | number                        | 0       | yes      |
+| onPageChange  | On change handler which returns the last selected page                                                                                                     | (currentPage: number) => void |         | yes      |
 | isDisabled    | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                       | false   | no       |
-| onPageChange  | On change handler which returns the last selected page                                                                                                     | (currentPage: number) => void | -       | yes      |
-
-### Page
-
-| Prop         | Description                                                                                                                                                                                                                         | Type        | Default | Required |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------- | -------- |
-| key          | This is not strictly related to the library but never forget to pass it down to the component                                                                                                                                       | string      | -       | yes      |
-| activeStyles | The styles of the active page button                                                                                                                                                                                                | ButtonProps | -       | no       |
-| normalStyles | The styles of the inactive page buttons                                                                                                                                                                                             | ButtonProps | -       | no       |
-| page         | Number used internally which is returned on the <b>onPageChange</b> handler when selecting the page <br> <br> For now use the <b>generatePages</b> helper with which you shouldn't have any problems. This may change in the future | number      | -       | yes      |
+| activeStyles  | The styles of the active page button                                                                                                                       | ButtonProps                   | {}      | no       |
+| normalStyles  | The styles of the inactive page buttons                                                                                                                    | ButtonProps                   | {}      | no       |
+| outerLimit    | The amount of pages to show at the start and at the end                                                                                                    | number                        | 0       | no       |
+| innerLimit    | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                        | 0       | no       |
