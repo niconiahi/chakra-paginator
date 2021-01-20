@@ -7,10 +7,10 @@ import { PaginatorProvider } from "../lib/providers/PaginatorProvider";
 export type PaginatorProps = {
   pagesQuantity: number;
   onPageChange: (page: number) => void;
-  normalStyles: ButtonProps;
-  activeStyles: ButtonProps;
-  innerLimit: number;
-  outerLimit: number;
+  normalStyles?: ButtonProps;
+  activeStyles?: ButtonProps;
+  innerLimit?: number;
+  outerLimit?: number;
   isDisabled: boolean;
 };
 

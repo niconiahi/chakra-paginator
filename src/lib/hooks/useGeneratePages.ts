@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { generatePages } from "../helpers";
 
 // lib
@@ -8,12 +8,6 @@ type Values = {
   pages: number[];
 };
 
-type Props = {
-  pagesQuantity: number;
-  innerLimit: number;
-  outerLimit: number;
-};
-
 export const useGeneratePages = (): Values => {
   // react hooks
   const { state } = useContext(PaginatorContext);
@@ -21,12 +15,16 @@ export const useGeneratePages = (): Values => {
   // constants
   const { currentPage, innerLimit, outerLimit, pagesQuantity } = state;
 
-  const pages = generatePages({
-    currentPage,
-    innerLimit,
-    outerLimit,
-    pagesQuantity,
-  });
+  const pages = useMemo(
+    () =>
+      generatePages({
+        currentPage,
+        innerLimit,
+        outerLimit,
+        pagesQuantity,
+      }),
+    [currentPage, innerLimit, outerLimit, pagesQuantity]
+  );
 
   return {
     pages,

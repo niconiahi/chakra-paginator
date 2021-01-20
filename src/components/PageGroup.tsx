@@ -14,8 +14,11 @@ export const PageGroup = forwardRef<FlexProps, "ol">(
 
     return (
       <Flex ref={ref} as="ol" {...flexProps}>
-        {pages.map((page) => (
-          <Page key={`paginator_page_${page}`} page={page} />
+        {pages.map((page, index) => (
+          <Page
+            key={`paginator_page_${page}_${index}_${page + index}`}
+            page={page}
+          />
         ))}
       </Flex>
     );

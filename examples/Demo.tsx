@@ -13,7 +13,7 @@ const Demo: FC = () => {
   );
 
   // Calculated or obtained from Backend
-  const pagesQuantity = 6;
+  const pagesQuantity = 20;
 
   // styles
   const normalStyles = {

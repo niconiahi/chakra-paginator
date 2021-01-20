@@ -46,10 +46,10 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
 
 type PaginatorProviderProps = {
   pagesQuantity: number;
-  normalStyles: ButtonProps;
-  activeStyles: ButtonProps;
-  innerLimit: number;
-  outerLimit: number;
+  normalStyles?: ButtonProps;
+  activeStyles?: ButtonProps;
+  innerLimit?: number;
+  outerLimit?: number;
   onPageChange: (page: number) => void;
   isDisabled: boolean;
 };
@@ -59,15 +59,17 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   pagesQuantity: pagesQuantityProp,
   innerLimit: innerLimitProp,
   outerLimit: outerLimitProp,
-  normalStyles,
-  activeStyles,
+  normalStyles: normalStylesProp,
+  activeStyles: activeStylesProp,
   onPageChange,
   isDisabled: isDisabledProp,
 }) => {
   // states
   const [innerLimit, setInnerLimit] = useState<number>(0);
+  const [normalStyles, setNormalStyles] = useState<ButtonProps>({});
+  const [activeStyles, setActiveStyles] = useState<ButtonProps>({});
   const [outerLimit, setOuterLimit] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [pagesQuantity, setPagesQuantity] = useState<number>(0);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
@@ -81,12 +83,28 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   }, [pagesQuantityProp]);
 
   useEffect(() => {
-    setInnerLimit(innerLimitProp);
+    if (innerLimitProp) {
+      setInnerLimit(innerLimitProp);
+    }
   }, [innerLimitProp]);
 
   useEffect(() => {
-    setOuterLimit(outerLimitProp);
+    if (outerLimitProp) {
+      setOuterLimit(outerLimitProp);
+    }
   }, [outerLimitProp]);
+
+  useEffect(() => {
+    if (normalStylesProp) {
+      setNormalStyles(normalStylesProp);
+    }
+  }, [normalStylesProp]);
+
+  useEffect(() => {
+    if (activeStylesProp) {
+      setActiveStyles(activeStylesProp);
+    }
+  }, [activeStylesProp]);
 
   // handlers
   const changePage = (page: number) => {

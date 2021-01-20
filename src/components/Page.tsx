@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, Flex, Text, ButtonProps, forwardRef } from "@chakra-ui/react";
+import { Button, Text, Flex, ButtonProps, forwardRef } from "@chakra-ui/react";
 
 // lib
 import { PaginatorContext } from "../lib/providers/PaginatorProvider";
@@ -18,11 +18,22 @@ export const Page = forwardRef<PageProps & ButtonProps, "li">(
     const { currentPage, isDisabled, activeStyles, normalStyles } = state;
     const isCurrent = currentPage === page;
     const isSeparator = page === 0;
+    const { h, height } = buttonProps;
+
+    const baseButtonProps: ButtonProps = {
+      as: "li",
+      minW: "auto",
+      px: 1,
+      pointerEvents: isDisabled ? "none" : "auto",
+      onClick: () => changePage(page),
+    };
 
     if (isSeparator)
       return (
-        <Flex>
-          <Text>...</Text>
+        <Flex h={h ?? 10} height={height ?? 10}>
+          <Text fontWeight="bold" h="full" verticalAlign="middle">
+            ...
+          </Text>
         </Flex>
       );
 
@@ -32,12 +43,8 @@ export const Page = forwardRef<PageProps & ButtonProps, "li">(
           ref={ref}
           aria-current={true}
           aria-label={`Current page, page ${page}`}
-          as="li"
-          minW="auto"
-          onClick={() => changePage(page)}
-          pointerEvents={isDisabled ? "none" : "auto"}
-          px={1}
           {...(isDisabled ? { "aria-disabled": true } : {})}
+          {...baseButtonProps}
           {...buttonProps}
           {...activeStyles}
         >
@@ -49,12 +56,8 @@ export const Page = forwardRef<PageProps & ButtonProps, "li">(
       <Button
         ref={ref}
         aria-label={`Go to page ${page}`}
-        as="li"
-        minW="auto"
-        onClick={() => changePage(page)}
-        pointerEvents={isDisabled ? "none" : "auto"}
-        px={1}
         {...(isDisabled ? { "aria-disabled": true } : {})}
+        {...baseButtonProps}
         {...buttonProps}
         {...normalStyles}
       >
