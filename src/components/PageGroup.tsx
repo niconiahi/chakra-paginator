@@ -1,10 +1,26 @@
 import React from "react";
 import { Flex, FlexProps, forwardRef } from "@chakra-ui/react";
 
+// lib
+import { useGeneratePages } from "../lib/hooks/useGeneratePages";
+
+// components
+import { Page } from "./Page";
+
 export const PageGroup = forwardRef<FlexProps, "ol">(
-  ({ children, ...flexProps }, ref) => (
-    <Flex ref={ref} as="ol" {...flexProps}>
-      {children}
-    </Flex>
-  )
+  ({ ...flexProps }, ref) => {
+    // custom hooks
+    const { pages } = useGeneratePages();
+
+    return (
+      <Flex ref={ref} as="ol" {...flexProps}>
+        {pages.map((page, index) => (
+          <Page
+            key={`paginator_page_${page}_${index}_${page + index}`}
+            page={page}
+          />
+        ))}
+      </Flex>
+    );
+  }
 );

@@ -12,7 +12,7 @@ export const Previous = forwardRef<ButtonProps, "button">(
     // constants
     const { changePage } = actions;
     const { currentPage, isDisabled } = state;
-    const isFirst = currentPage === 0;
+    const isFirst = currentPage === 1;
 
     // handlers
     const handlePreviousClick = () => {
