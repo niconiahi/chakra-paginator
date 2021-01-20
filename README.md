@@ -27,12 +27,7 @@ yarn add chakra-paginator
 ```js
 import React, { FC, useState } from "react";
 import { ButtonProps, Button, Flex } from "@chakra-ui/react";
-
-// components
-import { Paginator } from "../src/components/Paginator";
-import { Previous } from "../src/components/Previous";
-import { Next } from "../src/components/Next";
-import { PageGroup } from "../src/components/PageGroup";
+import { Paginator, Previous, Next, PageGroup } from "chakra-paginator";
 
 const Demo: FC = () => {
   const [isPaginatorDisabled, setIsPaginatorDisabled] =
