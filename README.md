@@ -28,36 +28,53 @@ yarn add chakra-paginator
 
 ## Usage
 
-```js
+```tsx
 import React, { FC, useState } from "react";
-import { ButtonProps, Button, Flex, ChakraProvider } from "@chakra-ui/react";
+import {
+  ButtonProps,
+  Button,
+  Flex,
+  ChakraProvider,
+  FlexProps,
+} from "@chakra-ui/react";
 import { Paginator, Previous, Next, PageGroup } from "chakra-paginator";
 
 const Demo: FC = () => {
   // react hooks
-  const [isPaginatorDisabled, setIsPaginatorDisabled] =
-    useState < boolean > false;
+  const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
+    false
+  );
 
   // constants
-  const pagesQuantity = 20; // -> calculated or obtained from Backend
-  const outerLimit = 2;
-  const innerLimit = 2;
+  const pagesQuantity: Number = 20; // -> calculated or obtained from Backend
+  const outerLimit: Number = 2;
+  const innerLimit: Number = 2;
 
   // styles
-  const normalStyles = {
-    color: "green.300",
+  const baseStyles: ButtonProps = {
+    w: 7,
+    fontSize: "sm",
+  };
+
+  const normalStyles: ButtonProps = {
+    ...baseStyles,
     bg: "red.300",
   };
 
   const activeStyles: ButtonProps = {
-    color: "red.300",
+    ...baseStyles,
     bg: "green.300",
   };
 
+  const separatorStyles: FlexProps = {
+    w: 7,
+    bg: "green.200",
+  };
+
   // handlers
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (currentPage: number) => {
     // -> request new data using the page number
-    console.log(page);
+    console.log(currentPage);
   };
 
   const handleDisableClick = () =>
@@ -71,16 +88,17 @@ const Demo: FC = () => {
         innerLimit={innerLimit}
         outerLimit={outerLimit}
         normalStyles={normalStyles}
+        separatorStyles={separatorStyles}
         pagesQuantity={pagesQuantity}
         onPageChange={handlePageChange}
       >
         <Flex align="center" justify="space-between" w="full" p={4}>
-          <Previous>
+          <Previous bg="green.300">
             Previous
             {/* Or an icon from `react-icons` */}
           </Previous>
-          <PageGroup />
-          <Next>
+          <PageGroup isInline align="center" />
+          <Next bg="green.300">
             Next
             {/* Or an icon from `react-icons` */}
           </Next>
