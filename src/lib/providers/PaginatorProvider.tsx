@@ -5,8 +5,13 @@ import React, {
   Dispatch,
   SetStateAction,
   useEffect,
+  useMemo,
 } from "react";
-import { ButtonProps } from "@chakra-ui/react";
+import { ButtonProps, FlexProps } from "@chakra-ui/react";
+
+// lib
+import { IconType } from "../types";
+import { INITIAL_VALUES } from "../constants";
 
 export type PaginatorContextValues = {
   state: {
@@ -14,13 +19,20 @@ export type PaginatorContextValues = {
     pagesQuantity: number;
     outerLimit: number;
     activeStyles: ButtonProps;
+    hoverIconRight?: IconType;
+    hoverIconLeft?: IconType;
+    separatorStyles: FlexProps;
     normalStyles: ButtonProps;
     innerLimit: number;
+    canJumpForward: boolean;
+    canJumpBack: boolean;
+    separatorIcon?: IconType;
     isDisabled: boolean;
   };
   actions: {
     setCurrentPage: Dispatch<SetStateAction<number>>;
-    setPagesQuantity: Dispatch<SetStateAction<number>>;
+    setCanJumpBack: Dispatch<SetStateAction<boolean>>;
+    setCanJumpForward: Dispatch<SetStateAction<boolean>>;
     setIsDisabled: Dispatch<SetStateAction<boolean>>;
     changePage: (page: number) => void;
   };
@@ -28,17 +40,24 @@ export type PaginatorContextValues = {
 
 export const PaginatorContext = createContext<PaginatorContextValues>({
   state: {
-    currentPage: 0,
-    activeStyles: {},
-    normalStyles: {},
-    innerLimit: 0,
-    outerLimit: 0,
-    pagesQuantity: 0,
-    isDisabled: false,
+    currentPage: INITIAL_VALUES.currentPage,
+    activeStyles: INITIAL_VALUES.activeStyles,
+    normalStyles: INITIAL_VALUES.normalStyles,
+    separatorStyles: INITIAL_VALUES.separatorStyles,
+    hoverIconRight: INITIAL_VALUES.hoverIconRight,
+    hoverIconLeft: INITIAL_VALUES.hoverIconLeft,
+    innerLimit: INITIAL_VALUES.innerLimit,
+    outerLimit: INITIAL_VALUES.outerLimit,
+    pagesQuantity: INITIAL_VALUES.pagesQuantity,
+    canJumpBack: INITIAL_VALUES.canJumpBack,
+    canJumpForward: INITIAL_VALUES.canJumpForward,
+    separatorIcon: INITIAL_VALUES.separatorIcon,
+    isDisabled: INITIAL_VALUES.isDisabled,
   },
   actions: {
     setCurrentPage: () => null,
-    setPagesQuantity: () => null,
+    setCanJumpBack: () => null,
+    setCanJumpForward: () => null,
     setIsDisabled: () => null,
     changePage: () => null,
   },
@@ -46,10 +65,14 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
 
 type PaginatorProviderProps = {
   pagesQuantity: number;
-  normalStyles?: ButtonProps;
-  activeStyles?: ButtonProps;
-  innerLimit?: number;
-  outerLimit?: number;
+  normalStyles: ButtonProps;
+  activeStyles: ButtonProps;
+  hoverIconRight?: IconType;
+  separatorStyles: FlexProps;
+  hoverIconLeft?: IconType;
+  innerLimit: number;
+  outerLimit: number;
+  separatorIcon?: IconType;
   onPageChange: (page: number) => void;
   isDisabled: boolean;
 };
@@ -59,52 +82,46 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   pagesQuantity: pagesQuantityProp,
   innerLimit: innerLimitProp,
   outerLimit: outerLimitProp,
+  separatorStyles: separatorStylesProp,
   normalStyles: normalStylesProp,
   activeStyles: activeStylesProp,
+  separatorIcon: separatorIconProp,
+  hoverIconRight: hoverIconRightProp,
+  hoverIconLeft: hoverIconLeftProp,
   onPageChange,
   isDisabled: isDisabledProp,
 }) => {
-  // states
-  const [innerLimit, setInnerLimit] = useState<number>(0);
-  const [normalStyles, setNormalStyles] = useState<ButtonProps>({});
-  const [activeStyles, setActiveStyles] = useState<ButtonProps>({});
-  const [outerLimit, setOuterLimit] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pagesQuantity, setPagesQuantity] = useState<number>(0);
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  // react hooks
+  const [currentPage, setCurrentPage] = useState<number>(
+    INITIAL_VALUES.currentPage
+  );
+  const [isDisabled, setIsDisabled] = useState<boolean>(
+    INITIAL_VALUES.isDisabled
+  );
+  const [canJumpForward, setCanJumpForward] = useState<boolean>(
+    INITIAL_VALUES.canJumpForward
+  );
+  const [canJumpBack, setCanJumpBack] = useState<boolean>(
+    INITIAL_VALUES.canJumpBack
+  );
 
-  // effects
+  const activeStyles = useMemo(() => activeStylesProp, [activeStylesProp]);
+  const separatorStyles = useMemo(() => separatorStylesProp, [
+    separatorStylesProp,
+  ]);
+  const innerLimit = useMemo(() => innerLimitProp, [innerLimitProp]);
+  const pagesQuantity = useMemo(() => pagesQuantityProp, [pagesQuantityProp]);
+  const outerLimit = useMemo(() => outerLimitProp, [outerLimitProp]);
+  const normalStyles = useMemo(() => normalStylesProp, [normalStylesProp]);
+  const separatorIcon = useMemo(() => separatorIconProp, [separatorIconProp]);
+  const hoverIconLeft = useMemo(() => hoverIconLeftProp, [hoverIconLeftProp]);
+  const hoverIconRight = useMemo(() => hoverIconRightProp, [
+    hoverIconRightProp,
+  ]);
+
   useEffect(() => {
     setIsDisabled(isDisabledProp);
   }, [isDisabledProp]);
-
-  useEffect(() => {
-    setPagesQuantity(pagesQuantityProp);
-  }, [pagesQuantityProp]);
-
-  useEffect(() => {
-    if (innerLimitProp) {
-      setInnerLimit(innerLimitProp);
-    }
-  }, [innerLimitProp]);
-
-  useEffect(() => {
-    if (outerLimitProp) {
-      setOuterLimit(outerLimitProp);
-    }
-  }, [outerLimitProp]);
-
-  useEffect(() => {
-    if (normalStylesProp) {
-      setNormalStyles(normalStylesProp);
-    }
-  }, [normalStylesProp]);
-
-  useEffect(() => {
-    if (activeStylesProp) {
-      setActiveStyles(activeStylesProp);
-    }
-  }, [activeStylesProp]);
 
   // handlers
   const changePage = (page: number) => {
@@ -113,18 +130,25 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   };
 
   const state = {
+    hoverIconLeft,
+    hoverIconRight,
     currentPage,
     pagesQuantity,
+    separatorIcon,
     normalStyles,
     activeStyles,
     isDisabled,
+    canJumpBack,
+    canJumpForward,
     innerLimit,
+    separatorStyles,
     outerLimit,
   };
 
   const actions = {
     setCurrentPage,
-    setPagesQuantity,
+    setCanJumpBack,
+    setCanJumpForward,
     setIsDisabled,
     changePage,
   };

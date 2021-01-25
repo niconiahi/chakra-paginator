@@ -1,10 +1,17 @@
+import { Dispatch, SetStateAction } from "react";
 import union from "lodash.union";
+
+// lib
+import { SEPARATORS } from "../lib/constants";
 
 type Arguments = {
   pagesQuantity: number;
   innerLimit: number;
   outerLimit: number;
   currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  setCanJumpBack: Dispatch<SetStateAction<boolean>>;
+  setCanJumpForward: Dispatch<SetStateAction<boolean>>;
 };
 
 export const getFirstItem = <T>(array: T[]): T => array[0];
@@ -14,6 +21,9 @@ export const generatePages = ({
   pagesQuantity,
   currentPage,
   innerLimit,
+  setCanJumpBack,
+  setCanJumpForward,
+  setCurrentPage,
   outerLimit,
 }: Arguments): number[] => {
   const allPages = [...Array(pagesQuantity).keys()].map((page) => page + 1);
@@ -66,10 +76,15 @@ export const generatePages = ({
     pages.reduce((acc: number[], page: number) => {
       const checkPageForSeparator = () => {
         if (page === lastPageOfOuterLeftPages && shouldHaveLeftSeparator) {
-          return [lastPageOfOuterLeftPages, 0];
+          setCanJumpBack(true);
+
+          return [lastPageOfOuterLeftPages, SEPARATORS.left];
         }
+
         if (page === firstPageOfOuterRightPages && shouldHaveRightSeparator) {
-          return [0, firstPageOfOuterRightPages];
+          setCanJumpForward(true);
+
+          return [SEPARATORS.right, firstPageOfOuterRightPages];
         }
 
         return [page];

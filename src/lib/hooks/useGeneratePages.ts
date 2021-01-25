@@ -10,10 +10,11 @@ type Values = {
 
 export const useGeneratePages = (): Values => {
   // react hooks
-  const { state } = useContext(PaginatorContext);
+  const { actions, state } = useContext(PaginatorContext);
 
   // constants
   const { currentPage, innerLimit, outerLimit, pagesQuantity } = state;
+  const { setCurrentPage, setCanJumpBack, setCanJumpForward } = actions;
 
   const pages = useMemo(
     () =>
@@ -22,6 +23,9 @@ export const useGeneratePages = (): Values => {
         innerLimit,
         outerLimit,
         pagesQuantity,
+        setCanJumpBack,
+        setCanJumpForward,
+        setCurrentPage,
       }),
     [currentPage, innerLimit, outerLimit, pagesQuantity]
   );
