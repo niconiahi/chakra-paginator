@@ -1,8 +1,14 @@
 import React, { useContext } from "react";
-import { Button, Text, Flex, ButtonProps, forwardRef } from "@chakra-ui/react";
+import { Button, ButtonProps, forwardRef } from "@chakra-ui/react";
 
 // lib
+import { SEPARATORS } from "../lib/constants";
 import { PaginatorContext } from "../lib/providers/PaginatorProvider";
+
+// components
+import FiChevronLeft from "./FiChevronLeft";
+import FiChevronRight from "./FiChevronRight";
+import Separator from "./Separator";
 
 export type PageProps = {
   page: number;
@@ -15,10 +21,19 @@ export const Page = forwardRef<PageProps & ButtonProps, "li">(
 
     // constants
     const { changePage } = actions;
-    const { currentPage, isDisabled, activeStyles, normalStyles } = state;
+    const {
+      currentPage,
+      isDisabled,
+      activeStyles,
+      hoverIconLeft,
+      hoverIconRight,
+      separatorStyles,
+      normalStyles,
+      separatorIcon,
+    } = state;
     const isCurrent = currentPage === page;
-    const isSeparator = page === 0;
-    const { h, height } = buttonProps;
+    const isLeftSeparator = page === SEPARATORS.left;
+    const isRightSeparator = page === SEPARATORS.right;
 
     const baseButtonProps: ButtonProps = {
       as: "li",
@@ -28,13 +43,24 @@ export const Page = forwardRef<PageProps & ButtonProps, "li">(
       onClick: () => changePage(page),
     };
 
-    if (isSeparator)
+    if (isLeftSeparator)
       return (
-        <Flex h={h ?? 10} height={height ?? 10}>
-          <Text fontWeight="bold" h="full" verticalAlign="middle">
-            ...
-          </Text>
-        </Flex>
+        <Separator
+          hoverIcon={hoverIconLeft ?? FiChevronLeft}
+          separatorIcon={separatorIcon}
+          separatorPosition="left"
+          separatorStyles={separatorStyles}
+        />
+      );
+
+    if (isRightSeparator)
+      return (
+        <Separator
+          hoverIcon={hoverIconRight ?? FiChevronRight}
+          separatorIcon={separatorIcon}
+          separatorPosition="right"
+          separatorStyles={separatorStyles}
+        />
       );
 
     if (isCurrent)
