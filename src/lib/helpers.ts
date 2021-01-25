@@ -1,5 +1,8 @@
 import union from "lodash.union";
 
+// lib
+import { SEPARATORS } from "../lib/constants";
+
 type Arguments = {
   pagesQuantity: number;
   innerLimit: number;
@@ -66,10 +69,11 @@ export const generatePages = ({
     pages.reduce((acc: number[], page: number) => {
       const checkPageForSeparator = () => {
         if (page === lastPageOfOuterLeftPages && shouldHaveLeftSeparator) {
-          return [lastPageOfOuterLeftPages, 0];
+          return [lastPageOfOuterLeftPages, SEPARATORS.left];
         }
+
         if (page === firstPageOfOuterRightPages && shouldHaveRightSeparator) {
-          return [0, firstPageOfOuterRightPages];
+          return [SEPARATORS.right, firstPageOfOuterRightPages];
         }
 
         return [page];

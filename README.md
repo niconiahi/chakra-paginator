@@ -22,6 +22,10 @@ yarn add chakra-paginator
 
 [Check it out in this Sandbox](https://codesandbox.io/s/chakra-paginator-demo-4n2gd)
 
+## Usefull information
+
+- _PageGroup_ component extends a _Stack_ Chakra component
+
 ## Usage
 
 ```js
