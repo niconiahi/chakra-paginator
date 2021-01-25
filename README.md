@@ -20,7 +20,7 @@ yarn add chakra-paginator
 
 ## Demo
 
-[Check it out in this Sandbox](https://codesandbox.io/s/suspicious-matsumoto-4n2gd)
+[Check it out in this Sandbox](https://codesandbox.io/s/chakra-paginator-demo-4n2gd)
 
 ## Usage
 
