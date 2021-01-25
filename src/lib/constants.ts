@@ -10,6 +10,8 @@ export const INITIAL_VALUES = {
   outerLimit: 0,
   hoverIconLeft: undefined,
   hoverIconRight: undefined,
+  canJumpForward: true,
+  canJumpBack: false,
 };
 
 export const SEPARATORS = {

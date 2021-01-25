@@ -48,6 +48,7 @@ export const Page = forwardRef<PageProps & ButtonProps, "li">(
         <Separator
           hoverIcon={hoverIconLeft ?? FiChevronLeft}
           separatorIcon={separatorIcon}
+          separatorPosition="left"
           separatorStyles={separatorStyles}
         />
       );
@@ -57,6 +58,7 @@ export const Page = forwardRef<PageProps & ButtonProps, "li">(
         <Separator
           hoverIcon={hoverIconRight ?? FiChevronRight}
           separatorIcon={separatorIcon}
+          separatorPosition="right"
           separatorStyles={separatorStyles}
         />
       );
