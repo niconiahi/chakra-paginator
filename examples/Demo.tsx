@@ -1,65 +1,79 @@
 import React, { FC, useState } from "react";
-import { ButtonProps, Button, Flex } from "@chakra-ui/react";
-
-// components
+import { ButtonProps, Button, Flex, ChakraProvider } from "@chakra-ui/react";
 import { Paginator } from "../src/components/Paginator";
 import { Previous } from "../src/components/Previous";
 import { Next } from "../src/components/Next";
 import { PageGroup } from "../src/components/PageGroup";
 
 const Demo: FC = () => {
+  // react hooks
   const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
     false
   );
 
-  // Calculated or obtained from Backend
-  const pagesQuantity = 20;
+  // constants
+  const pagesQuantity = 20; // -> calculated or obtained from Backend
+  const outerLimit = 2;
+  const innerLimit = 2;
 
   // styles
+  const baseStyles: ButtonProps = {
+    w: 7,
+    fontSize: "sm",
+  };
+
   const normalStyles: ButtonProps = {
-    color: "green.300",
+    ...baseStyles,
     bg: "red.300",
   };
 
   const activeStyles: ButtonProps = {
-    color: "red.300",
+    ...baseStyles,
     bg: "green.300",
   };
 
+  const separatorStyles: ButtonProps = {
+    w: 7,
+    bg: "green.200",
+  };
+
   // handlers
-  const handlePageChange = (currentPage: number) => {
-    // Request new data using the page number
-    console.log(currentPage);
+  const handlePageChange = (page: number) => {
+    // -> request new data using the page number
+    console.log(page);
   };
 
   const handleDisableClick = () =>
     setIsPaginatorDisabled((oldState) => !oldState);
 
   return (
-    <Flex p={4}>
+    <ChakraProvider>
       <Paginator
         activeStyles={activeStyles}
-        innerLimit={2}
+        innerLimit={innerLimit}
         isDisabled={isPaginatorDisabled}
         normalStyles={normalStyles}
         onPageChange={handlePageChange}
-        outerLimit={2}
+        outerLimit={outerLimit}
         pagesQuantity={pagesQuantity}
+        separatorStyles={separatorStyles}
       >
-        <Previous>
-          Previous
-          {/* Or an icon from `react-icons` library */}
-        </Previous>
-        <PageGroup />
-        <Next>
-          Next
-          {/* Or an icon from `react-icons` library */}
-        </Next>
+        <Flex align="center" justify="space-between" p={4} w="full">
+          <Previous>
+            Previous
+            {/* Or an icon from `react-icons` */}
+          </Previous>
+          <PageGroup isInline align="center" />
+          <Next>
+            Next
+            {/* Or an icon from `react-icons` */}
+          </Next>
+        </Flex>
       </Paginator>
-      <Button ml={4} onClick={handleDisableClick}>
-        Disable ON / OFF
-      </Button>
-    </Flex>
+      <Flex align="center" justify="center" w="full">
+        <Button onClick={handleDisableClick}>Disable ON / OFF</Button>
+      </Flex>
+    </ChakraProvider>
   );
 };
 

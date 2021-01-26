@@ -32,13 +32,7 @@ yarn add chakra-paginator
 
 ```tsx
 import React, { FC, useState } from "react";
-import {
-  ButtonProps,
-  Button,
-  Flex,
-  ChakraProvider,
-  FlexProps,
-} from "@chakra-ui/react";
+import { ButtonProps, Button, Flex, ChakraProvider } from "@chakra-ui/react";
 import { Paginator, Previous, Next, PageGroup } from "chakra-paginator";
 
 const Demo: FC = () => {
@@ -68,7 +62,7 @@ const Demo: FC = () => {
     bg: "green.300",
   };
 
-  const separatorStyles: FlexProps = {
+  const separatorStyles: ButtonProps = {
     w: 7,
     bg: "green.200",
   };
@@ -131,9 +125,15 @@ export default Demo;
 | isDisabled      | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                       | false   | no       |
 | activeStyles    | The styles of the active page button                                                                                                                       | ButtonProps                   | {}      | no       |
 | normalStyles    | The styles of the inactive page buttons                                                                                                                    | ButtonProps                   | {}      | no       |
-| separatorStyles | The styles of the separator wrapper                                                                                                                        | FlexProps                     | {}      | no       |
+| separatorStyles | The styles of the separator wrapper                                                                                                                        | ButtonProps                   | {}      | no       |
 | outerLimit      | The amount of pages to show at the start and at the end                                                                                                    | number                        | 0       | no       |
 | innerLimit      | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                        | 0       | no       |
+
+---
+
+### Container
+
+- Container is a _Flex_ component, so any _FlexProps_ are accpeted
 
 ---
 
