@@ -4,6 +4,7 @@ import { Paginator } from "../src/components/Paginator";
 import { Previous } from "../src/components/Previous";
 import { Next } from "../src/components/Next";
 import { PageGroup } from "../src/components/PageGroup";
+import { Container } from "../src/components/Container";
 
 const Demo: FC = () => {
   // react hooks
@@ -58,7 +59,7 @@ const Demo: FC = () => {
         pagesQuantity={pagesQuantity}
         separatorStyles={separatorStyles}
       >
-        <Flex align="center" justify="space-between" p={4} w="full">
+        <Container align="center" justify="space-between" p={4} w="full">
           <Previous>
             Previous
             {/* Or an icon from `react-icons` */}
@@ -68,7 +69,7 @@ const Demo: FC = () => {
             Next
             {/* Or an icon from `react-icons` */}
           </Next>
-        </Flex>
+        </Container>
       </Paginator>
       <Flex align="center" justify="center" w="full">
         <Button onClick={handleDisableClick}>Disable ON / OFF</Button>

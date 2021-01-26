@@ -33,7 +33,13 @@ yarn add chakra-paginator
 ```tsx
 import React, { FC, useState } from "react";
 import { ButtonProps, Button, Flex, ChakraProvider } from "@chakra-ui/react";
-import { Paginator, Previous, Next, PageGroup } from "chakra-paginator";
+import {
+  Paginator,
+  Previous,
+  Next,
+  PageGroup,
+  Container,
+} from "chakra-paginator";
 
 const Demo: FC = () => {
   // react hooks
@@ -88,7 +94,7 @@ const Demo: FC = () => {
         pagesQuantity={pagesQuantity}
         onPageChange={handlePageChange}
       >
-        <Flex align="center" justify="space-between" w="full" p={4}>
+        <Container align="center" justify="space-between" w="full" p={4}>
           <Previous bg="green.300">
             Previous
             {/* Or an icon from `react-icons` */}
@@ -98,7 +104,7 @@ const Demo: FC = () => {
             Next
             {/* Or an icon from `react-icons` */}
           </Next>
-        </Flex>
+        </Container>
       </Paginator>
       <Flex w="full" justify="center" align="center">
         <Button ml={4} onClick={handleDisableClick}>
