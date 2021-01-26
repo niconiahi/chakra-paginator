@@ -2,7 +2,9 @@
 
 ## Version
 
-[![npm version](https://badge.fury.io/js/chakra-paginator.svg)](https://badge.fury.io/js/chakra-paginator)
+## [![npm version](https://badge.fury.io/js/chakra-paginator.svg)](https://badge.fury.io/js/chakra-paginator)
+
+---
 
 ## Installation
 
@@ -18,13 +20,13 @@ npm i chakra-paginator
 yarn add chakra-paginator
 ```
 
+---
+
 ## Demo
 
-[Check it out in this Sandbox](https://codesandbox.io/s/chakra-paginator-demo-4n2gd)
+## [Check it out in this Sandbox](https://codesandbox.io/s/chakra-paginator-demo-4n2gd)
 
-## Usefull information
-
-- _PageGroup_ component extends a _Stack_ Chakra component
+---
 
 ## Usage
 
@@ -115,6 +117,8 @@ const Demo: FC = () => {
 
 export default Demo;
 ```
+
+---
 
 ## Components API
 
