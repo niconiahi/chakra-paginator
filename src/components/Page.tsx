@@ -78,7 +78,7 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
       {...(isCurrent ? { "aria-current": true } : {})}
       {...baseButtonProps}
       {...buttonProps}
-      {...activeStyles}
+      {...(isCurrent ? activeStyles : normalStyles)}
     >
       {page}
     </Button>
