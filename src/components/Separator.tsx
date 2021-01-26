@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useContext, useMemo } from "react";
-import { Flex, FlexProps, Icon } from "@chakra-ui/react";
+import { Button, ButtonProps, Icon } from "@chakra-ui/react";
 
 // components
 import FiMoreHorizontal from "./FiMoreHorizontal";
@@ -8,51 +8,55 @@ import FiMoreHorizontal from "./FiMoreHorizontal";
 import { IconType } from "../lib/types";
 import { PaginatorContext } from "../lib/providers/PaginatorProvider";
 
-type Props = {
+type SeparatorProps = {
   separatorIcon?: IconType;
   hoverIcon: IconType;
-  separatorStyles: FlexProps;
+  separatorStyles: ButtonProps;
   separatorPosition: "left" | "right";
+  isDisabled: boolean;
 };
 
-const Separator: FC<Props> = ({
-  separatorIcon,
+export const Separator: FC<SeparatorProps> = ({
   hoverIcon,
+  isDisabled,
+  separatorIcon,
   separatorStyles,
   separatorPosition,
 }) => {
   // react hooks
   const { actions, state } = useContext(PaginatorContext);
-  const { canJumpBack, canJumpForward, innerLimit, currentPage } = state;
+  const { innerLimit, currentPage } = state;
   const { setCurrentPage } = actions;
-
-  const canJump = useMemo(() => {
-    if (separatorPosition === "left" && canJumpBack) return true;
-    if (separatorPosition === "right" && canJumpForward) return true;
-    return false;
-  }, [separatorPosition, canJumpBack, canJumpForward]);
 
   const pageToJump = useMemo(() => {
     if (separatorPosition === "left") return currentPage - innerLimit;
     if (separatorPosition === "right") return currentPage + innerLimit;
   }, [separatorPosition, innerLimit, currentPage]);
 
+  // constants
+  const jumpingDirection =
+    separatorPosition === "left" ? "backwards" : "forward";
+
   // handlers
   const handleJumpClick = useCallback(() => {
+    if (isDisabled) return;
+
     if (pageToJump) {
       setCurrentPage(pageToJump);
     }
-  }, [pageToJump]);
+  }, [pageToJump, isDisabled, setCurrentPage]);
 
   return (
-    <Flex
+    <Button
       align="center"
+      aria-label={`Jump pages ${jumpingDirection}`}
+      as="li"
       bg="transparent"
-      borderRadius="md"
-      cursor={canJump ? "pointer" : "default"}
-      h={10}
+      cursor={isDisabled ? "not-allowed" : "pointer"}
       justify="center"
+      minW="auto"
       onClick={handleJumpClick}
+      pointerEvents={isDisabled ? "none" : "auto"}
       pos="relative"
       px={1}
       sx={{
@@ -62,6 +66,7 @@ const Separator: FC<Props> = ({
           },
         },
       }}
+      {...(isDisabled ? { "aria-disabled": true } : {})}
       {...separatorStyles}
     >
       <Icon
@@ -87,8 +92,6 @@ const Separator: FC<Props> = ({
         transition="all  cubic-bezier(0.4, 1, 0.9, 0.6) 0.3s"
         w={4}
       />
-    </Flex>
+    </Button>
   );
 };
-
-export default Separator;

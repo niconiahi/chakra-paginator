@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useMemo,
 } from "react";
-import { ButtonProps, FlexProps } from "@chakra-ui/react";
+import { ButtonProps } from "@chakra-ui/react";
 
 // lib
 import { IconType } from "../types";
@@ -21,18 +21,14 @@ export type PaginatorContextValues = {
     activeStyles: ButtonProps;
     hoverIconRight?: IconType;
     hoverIconLeft?: IconType;
-    separatorStyles: FlexProps;
+    separatorStyles: ButtonProps;
     normalStyles: ButtonProps;
     innerLimit: number;
-    canJumpForward: boolean;
-    canJumpBack: boolean;
     separatorIcon?: IconType;
     isDisabled: boolean;
   };
   actions: {
     setCurrentPage: Dispatch<SetStateAction<number>>;
-    setCanJumpBack: Dispatch<SetStateAction<boolean>>;
-    setCanJumpForward: Dispatch<SetStateAction<boolean>>;
     setIsDisabled: Dispatch<SetStateAction<boolean>>;
     changePage: (page: number) => void;
   };
@@ -49,15 +45,11 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
     innerLimit: INITIAL_VALUES.innerLimit,
     outerLimit: INITIAL_VALUES.outerLimit,
     pagesQuantity: INITIAL_VALUES.pagesQuantity,
-    canJumpBack: INITIAL_VALUES.canJumpBack,
-    canJumpForward: INITIAL_VALUES.canJumpForward,
     separatorIcon: INITIAL_VALUES.separatorIcon,
     isDisabled: INITIAL_VALUES.isDisabled,
   },
   actions: {
     setCurrentPage: () => null,
-    setCanJumpBack: () => null,
-    setCanJumpForward: () => null,
     setIsDisabled: () => null,
     changePage: () => null,
   },
@@ -68,7 +60,7 @@ type PaginatorProviderProps = {
   normalStyles: ButtonProps;
   activeStyles: ButtonProps;
   hoverIconRight?: IconType;
-  separatorStyles: FlexProps;
+  separatorStyles: ButtonProps;
   hoverIconLeft?: IconType;
   innerLimit: number;
   outerLimit: number;
@@ -97,12 +89,6 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   );
   const [isDisabled, setIsDisabled] = useState<boolean>(
     INITIAL_VALUES.isDisabled
-  );
-  const [canJumpForward, setCanJumpForward] = useState<boolean>(
-    INITIAL_VALUES.canJumpForward
-  );
-  const [canJumpBack, setCanJumpBack] = useState<boolean>(
-    INITIAL_VALUES.canJumpBack
   );
 
   const activeStyles = useMemo(() => activeStylesProp, [activeStylesProp]);
@@ -138,8 +124,6 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
     normalStyles,
     activeStyles,
     isDisabled,
-    canJumpBack,
-    canJumpForward,
     innerLimit,
     separatorStyles,
     outerLimit,
@@ -147,8 +131,6 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
 
   const actions = {
     setCurrentPage,
-    setCanJumpBack,
-    setCanJumpForward,
     setIsDisabled,
     changePage,
   };
