@@ -33,6 +33,9 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
   const isCurrent = currentPage === page;
   const isLeftSeparator = page === SEPARATORS.left;
   const isRightSeparator = page === SEPARATORS.right;
+  const pageLabel = isCurrent
+    ? `Current page, page ${page}`
+    : `Go to page ${page}`;
 
   const baseButtonProps: ButtonProps = useMemo(
     () => ({
@@ -68,27 +71,14 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
       />
     );
 
-  if (isCurrent)
-    return (
-      <Button
-        aria-current={true}
-        aria-label={`Current page, page ${page}`}
-        {...(isDisabled ? { "aria-disabled": true } : {})}
-        {...baseButtonProps}
-        {...buttonProps}
-        {...activeStyles}
-      >
-        {page}
-      </Button>
-    );
-
   return (
     <Button
-      aria-label={`Go to page ${page}`}
+      aria-label={pageLabel}
       {...(isDisabled ? { "aria-disabled": true } : {})}
+      {...(isCurrent ? { "aria-current": true } : {})}
       {...baseButtonProps}
       {...buttonProps}
-      {...normalStyles}
+      {...activeStyles}
     >
       {page}
     </Button>
