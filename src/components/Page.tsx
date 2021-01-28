@@ -1,5 +1,5 @@
 import React, { useMemo, useContext, FC } from "react";
-import { Button, ButtonProps } from "@chakra-ui/react";
+import { Button, Flex, ButtonProps } from "@chakra-ui/react";
 
 // lib
 import { SEPARATORS } from "../lib/constants";
@@ -39,11 +39,10 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
 
   const baseButtonProps: ButtonProps = useMemo(
     () => ({
-      as: "li",
       minW: "auto",
       px: 1,
       pointerEvents: isDisabled ? "none" : "auto",
-      cursor: isDisabled ? "not-allowed" : "pointer",
+      cursor: "pointer",
       onClick: () => changePage(page),
     }),
     [isDisabled]
@@ -72,15 +71,17 @@ export const Page: FC<PageProps & ButtonProps> = ({ page, ...buttonProps }) => {
     );
 
   return (
-    <Button
-      aria-label={pageLabel}
-      {...(isDisabled ? { "aria-disabled": true } : {})}
-      {...(isCurrent ? { "aria-current": true } : {})}
-      {...baseButtonProps}
-      {...buttonProps}
-      {...(isCurrent ? activeStyles : normalStyles)}
-    >
-      {page}
-    </Button>
+    <Flex as="li">
+      <Button
+        aria-label={pageLabel}
+        {...(isDisabled ? { "aria-disabled": true } : {})}
+        {...(isCurrent ? { "aria-current": true } : {})}
+        {...baseButtonProps}
+        {...buttonProps}
+        {...(isCurrent ? activeStyles : normalStyles)}
+      >
+        {page}
+      </Button>
+    </Flex>
   );
 };
