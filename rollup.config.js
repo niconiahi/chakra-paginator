@@ -19,12 +19,6 @@ export default [
         exports: "named",
         name: PACKAGE_NAME,
       },
-      {
-        file: `${OUTPUT_DIR}/${PACKAGE_NAME}.js`,
-        format: "es",
-        exports: "named",
-        name: PACKAGE_NAME,
-      },
     ],
     plugins: [
       peerDepsExternal(),
