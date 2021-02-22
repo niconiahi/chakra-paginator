@@ -124,17 +124,17 @@ export default Demo;
 
 ### Paginator
 
-| Prop            | Description                                                                                                                                                | Type                          | Default | Required |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------- | -------- |
-| pagesQuantity   | The total number of pages, calculated based on Backend data                                                                                                | number                        | 0       | yes      |
-| onPageChange    | On change handler which returns the last selected page                                                                                                     | (currentPage: number) => void |         | yes      |
-| isDisabled      | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                       | false   | no       |
-| activeStyles    | The styles of the active page button                                                                                                                       | ButtonProps                   | {}      | no       |
-| normalStyles    | The styles of the inactive page buttons                                                                                                                    | ButtonProps                   | {}      | no       |
-| separatorStyles | The styles of the separator wrapper                                                                                                                        | ButtonProps                   | {}      | no       |
-| outerLimit      | The amount of pages to show at the start and at the end                                                                                                    | number                        | 0       | no       |
-| innerLimit      | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                        | 0       | no       |
-| currentPage     | Manually set the _currentPage_ of the pagination                                                                                                           | number                        | 1       | no       |
+| Prop            | Description                                                                                                                                                | Type                       | Default | Required |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ------- | -------- |
+| pagesQuantity   | The total number of pages, calculated based on Backend data                                                                                                | number                     | 0       | yes      |
+| onPageChange    | On change handler which returns the last selected page                                                                                                     | (nextPage: number) => void |         | yes      |
+| isDisabled      | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                    | false   | no       |
+| activeStyles    | The styles of the active page button                                                                                                                       | ButtonProps                | {}      | no       |
+| normalStyles    | The styles of the inactive page buttons                                                                                                                    | ButtonProps                | {}      | no       |
+| separatorStyles | The styles of the separator wrapper                                                                                                                        | ButtonProps                | {}      | no       |
+| outerLimit      | The amount of pages to show at the start and at the end                                                                                                    | number                     | 0       | no       |
+| innerLimit      | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                     | 0       | no       |
+| currentPage     | Manually set the _currentPage_ of the pagination                                                                                                           | number                     | 1       | no       |
 
 ---
 
