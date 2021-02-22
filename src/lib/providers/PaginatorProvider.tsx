@@ -118,27 +118,27 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
       console.error(
         `Chakra paginator -> passed down currentPage has to be a whole number`
       );
+
+      return;
     }
 
     if (currentPageProp > pagesQuantity) {
       console.error(
         `Chakra paginator -> passed down currentPage can't be higher than pagesQuantity`
       );
+
+      return;
     }
 
     if (currentPageProp < 1) {
       console.error(
         `Chakra paginator -> passed down currentPage can't be lower than 1`
       );
+
+      return;
     }
 
-    if (
-      currentPageProp &&
-      currentPageProp !== currentPage &&
-      currentPageProp <= pagesQuantity &&
-      currentPageProp >= 1 &&
-      !isDecimalNumber(currentPageProp)
-    ) {
+    if (currentPageProp && currentPageProp !== currentPage) {
       setCurrentPage(currentPageProp);
     }
   }, [currentPageProp]);
