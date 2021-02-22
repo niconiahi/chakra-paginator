@@ -12,6 +12,7 @@ import { ButtonProps } from "@chakra-ui/react";
 // lib
 import { IconType } from "../types";
 import { INITIAL_VALUES } from "../constants";
+import { isDecimalNumber } from "../helpers";
 
 export type PaginatorContextValues = {
   state: {
@@ -63,6 +64,7 @@ type PaginatorProviderProps = {
   separatorStyles: ButtonProps;
   hoverIconLeft?: IconType;
   innerLimit: number;
+  currentPage: number;
   outerLimit: number;
   separatorIcon?: IconType;
   onPageChange: (page: number) => void;
@@ -72,6 +74,7 @@ type PaginatorProviderProps = {
 export const PaginatorProvider: FC<PaginatorProviderProps> = ({
   children,
   pagesQuantity: pagesQuantityProp,
+  currentPage: currentPageProp,
   innerLimit: innerLimitProp,
   outerLimit: outerLimitProp,
   separatorStyles: separatorStylesProp,
@@ -105,9 +108,40 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
     hoverIconRightProp,
   ]);
 
+  // effects
   useEffect(() => {
     setIsDisabled(isDisabledProp);
   }, [isDisabledProp]);
+
+  useEffect(() => {
+    if (isDecimalNumber(currentPageProp)) {
+      console.error(
+        `Chakra paginator -> passed down currentPage has to be a whole number`
+      );
+
+      return;
+    }
+
+    if (currentPageProp > pagesQuantity) {
+      console.error(
+        `Chakra paginator -> passed down currentPage can't be higher than pagesQuantity`
+      );
+
+      return;
+    }
+
+    if (currentPageProp < 1) {
+      console.error(
+        `Chakra paginator -> passed down currentPage can't be lower than 1`
+      );
+
+      return;
+    }
+
+    if (currentPageProp && currentPageProp !== currentPage) {
+      setCurrentPage(currentPageProp);
+    }
+  }, [currentPageProp]);
 
   // handlers
   const changePage = (page: number) => {

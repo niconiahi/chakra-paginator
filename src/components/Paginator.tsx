@@ -12,6 +12,7 @@ export type PaginatorProps = {
   normalStyles?: ButtonProps;
   activeStyles?: ButtonProps;
   separatorStyles?: ButtonProps;
+  currentPage?: number;
   innerLimit?: number;
   outerLimit?: number;
   separatorIcon?: IconType;
@@ -32,10 +33,12 @@ export const Paginator: FC<PaginatorProps> = ({
   outerLimit = INITIAL_VALUES.outerLimit,
   hoverIconLeft = INITIAL_VALUES.hoverIconLeft,
   hoverIconRight = INITIAL_VALUES.hoverIconRight,
+  currentPage = INITIAL_VALUES.currentPage,
   onPageChange,
 }) => (
   <PaginatorProvider
     activeStyles={activeStyles}
+    currentPage={currentPage}
     hoverIconLeft={hoverIconLeft}
     hoverIconRight={hoverIconRight}
     innerLimit={innerLimit}

@@ -13,6 +13,10 @@ type Arguments = {
 export const getFirstItem = <T>(array: T[]): T => array[0];
 export const getLastItem = <T>(array: T[]): T => array.slice(-1)[0];
 
+export const isDecimalNumber = (number: number): boolean => {
+  return number - Math.floor(number) !== 0;
+};
+
 export const generatePages = ({
   pagesQuantity,
   currentPage,
@@ -66,7 +70,7 @@ export const generatePages = ({
   );
 
   const addSeparators = (pages: number[]) =>
-    pages.reduce((acc: number[], page: number) => {
+    pages.reduce<number[]>((acc: number[], page: number) => {
       const checkPageForSeparator = () => {
         if (page === lastPageOfOuterLeftPages && shouldHaveLeftSeparator) {
           return [lastPageOfOuterLeftPages, SEPARATORS.left];
@@ -80,7 +84,7 @@ export const generatePages = ({
       };
 
       return [...acc, ...checkPageForSeparator()];
-    }, [] as number[]);
+    }, []);
 
   const pages = addSeparators(unduplicatedPages);
 
