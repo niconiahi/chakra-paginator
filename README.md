@@ -74,9 +74,9 @@ const Demo: FC = () => {
   };
 
   // handlers
-  const handlePageChange = (currentPage: number) => {
+  const handlePageChange = (nextPage: number) => {
     // -> request new data using the page number
-    console.log(currentPage);
+    console.log(nextPage);
   };
 
   const handleDisableClick = () =>
@@ -134,12 +134,13 @@ export default Demo;
 | separatorStyles | The styles of the separator wrapper                                                                                                                        | ButtonProps                   | {}      | no       |
 | outerLimit      | The amount of pages to show at the start and at the end                                                                                                    | number                        | 0       | no       |
 | innerLimit      | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                        | 0       | no       |
+| currentPage     | Manually set the _currentPage_ of the pagination                                                                                                           | number                        | 1       | no       |
 
 ---
 
 ### Container
 
-- Container is a _Flex_ component, so any _FlexProps_ are accpeted
+- Container is a _Flex_ component, so any _FlexProps_ are accepted
 
 ---
 
