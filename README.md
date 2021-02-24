@@ -43,6 +43,7 @@ import {
 
 const Demo: FC = () => {
   // react hooks
+  const [currentPage, setCurrentPage] = useState<number>(3);
   const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
     false
   );
@@ -76,7 +77,8 @@ const Demo: FC = () => {
   // handlers
   const handlePageChange = (nextPage: number) => {
     // -> request new data using the page number
-    console.log(nextPage);
+    setCurrentPage(nextPage);
+    console.log("request new data with ->", nextPage);
   };
 
   const handleDisableClick = () =>
@@ -89,6 +91,7 @@ const Demo: FC = () => {
         activeStyles={activeStyles}
         innerLimit={innerLimit}
         outerLimit={outerLimit}
+        currentPage={currentPage}
         normalStyles={normalStyles}
         separatorStyles={separatorStyles}
         pagesQuantity={pagesQuantity}

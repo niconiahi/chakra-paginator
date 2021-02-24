@@ -8,6 +8,7 @@ import { Container } from "../src/components/Container";
 
 const Demo: FC = () => {
   // react hooks
+  const [currentPage, setCurrentPage] = useState<number>(3);
   const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
     false
   );
@@ -39,9 +40,10 @@ const Demo: FC = () => {
   };
 
   // handlers
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (nextPage: number) => {
     // -> request new data using the page number
-    console.log(page);
+    setCurrentPage(nextPage);
+    console.log("request new data with ->", nextPage);
   };
 
   const handleDisableClick = () =>
@@ -51,6 +53,7 @@ const Demo: FC = () => {
     <ChakraProvider>
       <Paginator
         activeStyles={activeStyles}
+        currentPage={currentPage}
         innerLimit={innerLimit}
         isDisabled={isPaginatorDisabled}
         normalStyles={normalStyles}
@@ -60,19 +63,21 @@ const Demo: FC = () => {
         separatorStyles={separatorStyles}
       >
         <Container align="center" justify="space-between" p={4} w="full">
-          <Previous>
+          <Previous bg="green.300">
             Previous
             {/* Or an icon from `react-icons` */}
           </Previous>
           <PageGroup isInline align="center" />
-          <Next>
+          <Next bg="green.300">
             Next
             {/* Or an icon from `react-icons` */}
           </Next>
         </Container>
       </Paginator>
       <Flex align="center" justify="center" w="full">
-        <Button onClick={handleDisableClick}>Disable ON / OFF</Button>
+        <Button ml={4} onClick={handleDisableClick}>
+          Disable ON / OFF
+        </Button>
       </Flex>
     </ChakraProvider>
   );
