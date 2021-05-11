@@ -31,57 +31,34 @@ yarn add chakra-paginator
 ## Usage
 
 ```tsx
-import React, { FC, ChangeEvent, useEffect, useState, useMemo } from "react";
-import {
-  Grid,
-  Center,
-  Select,
-  ButtonProps,
-  Text,
-  Button,
-  ChakraProvider
-} from "@chakra-ui/react";
-import {
-  Paginator,
-  Container,
-  Previous,
-  Next,
-  PageGroup
-} from "chakra-paginator";
-
-const fetchPokemons = (pageSize: number, offset: number) => {
-  return fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${pageSize}&offset=${offset}`
-  ).then((res) => res.json());
-};
-
 const Demo: FC = () => {
-  // react hooks
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
+  // states
   const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
     undefined
   );
   const [pokemons, setPokemons] = useState<any[]>([]);
-  const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
-    false
-  );
 
   // constants
   const outerLimit = 2;
   const innerLimit = 2;
 
-  // memos
-  const offset = useMemo(() => {
-    return currentPage * pageSize - pageSize;
-  }, [currentPage, pageSize]);
-  const pagesQuantity = useMemo(() => {
-    if (!pokemonsTotal || !pageSize) {
-      return undefined;
+  const {
+    pagesQuantity,
+    offset, // you may not need this one, of course, but it's available for you
+    currentPage,
+    setCurrentPage,
+    setIsDisabled,
+    isDisabled,
+    pageSize,
+    setPageSize
+  } = usePaginator({
+    total: pokemonsTotal,
+    initialState: {
+      pageSize: 5,
+      isDisabled: false,
+      currentPage: 1
     }
-
-    return Math.ceil(pokemonsTotal / pageSize);
-  }, [pokemonsTotal, pageSize]);
+  });
 
   // effects
   useEffect(() => {
@@ -131,18 +108,18 @@ const Demo: FC = () => {
     setPageSize(pageSize);
   };
 
-  const handleDisableClick = () =>
-    setIsPaginatorDisabled((oldState) => !oldState);
+  const handleDisableClick = () => {
+    return setIsDisabled((oldState) => !oldState);
+  };
 
   return (
     <ChakraProvider>
       <Paginator
-        isDisabled={isPaginatorDisabled}
+        isDisabled={isDisabled}
         activeStyles={activeStyles}
         innerLimit={innerLimit}
         currentPage={currentPage}
         outerLimit={outerLimit}
-        currentPage={currentPage}
         normalStyles={normalStyles}
         separatorStyles={separatorStyles}
         pagesQuantity={pagesQuantity}
@@ -175,9 +152,9 @@ const Demo: FC = () => {
         px={20}
         mt={20}
       >
-        {pokemons?.map((pokemon) => (
-          <Center p={4} bg="green.100">
-            <Text>{pokemon.name}</Text>
+        {pokemons?.map(({ name }) => (
+          <Center p={4} bg="green.100" key={name}>
+            <Text>{name}</Text>
           </Center>
         ))}
       </Grid>
