@@ -142,6 +142,7 @@ const Demo: FC = () => {
         innerLimit={innerLimit}
         currentPage={currentPage}
         outerLimit={outerLimit}
+        currentPage={currentPage}
         normalStyles={normalStyles}
         separatorStyles={separatorStyles}
         pagesQuantity={pagesQuantity}
