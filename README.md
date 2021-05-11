@@ -184,6 +184,11 @@ export default Demo;
 | currentPage     | Manually set the _currentPage_ of the pagination                                                                                                           | number                     | 1       | no       |
 
 ---
+### usePaginator
+| Prop         | Description                                            | Type         | Default | Required |
+|--------------|--------------------------------------------------------|--------------|---------|----------|
+| total        | The total amount of items obtained from a Backend call | number       | 0       | no       |
+| initialState | Initial states for pagination values                   | InitialState |         | yes      |
 
 ### Container
 

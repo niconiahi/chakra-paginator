@@ -1,12 +1,14 @@
 import { Dispatch, useState, useMemo, SetStateAction } from "react";
 
+type InitialState = {
+  pageSize: number;
+  currentPage: number;
+  isDisabled: boolean;
+};
+
 type UsePaginator = {
   total?: number;
-  initialState: {
-    pageSize: number;
-    currentPage: number;
-    isDisabled: boolean;
-  };
+  initialState: InitialState;
 };
 
 export const usePaginator = ({
