@@ -16,10 +16,7 @@ export const PageGroup: FC<PageGroupProps> = ({ ...stackProps }) => {
   return (
     <Stack isInline as="ol" spacing={1} {...stackProps}>
       {pages.map((page, index) => (
-        <Page
-          key={`paginator_page_${page}_${index}_${page + index}`}
-          page={page}
-        />
+        <Page key={`paginator_page_${page}_${index}`} page={page} />
       ))}
     </Stack>
   );

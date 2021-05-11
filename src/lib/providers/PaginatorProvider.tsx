@@ -17,7 +17,7 @@ import { isDecimalNumber } from "../helpers";
 export type PaginatorContextValues = {
   state: {
     currentPage: number;
-    pagesQuantity: number;
+    pagesQuantity?: number;
     outerLimit: number;
     activeStyles: ButtonProps;
     hoverIconRight?: IconType;
@@ -57,7 +57,7 @@ export const PaginatorContext = createContext<PaginatorContextValues>({
 });
 
 type PaginatorProviderProps = {
-  pagesQuantity: number;
+  pagesQuantity?: number;
   normalStyles: ButtonProps;
   activeStyles: ButtonProps;
   hoverIconRight?: IconType;
@@ -119,6 +119,10 @@ export const PaginatorProvider: FC<PaginatorProviderProps> = ({
         `Chakra paginator -> passed down currentPage has to be a whole number`
       );
 
+      return;
+    }
+
+    if (!pagesQuantity) {
       return;
     }
 
