@@ -4,7 +4,7 @@ import union from "lodash.union";
 import { SEPARATORS } from "../lib/constants";
 
 type Arguments = {
-  pagesQuantity: number;
+  pagesQuantity?: number;
   innerLimit: number;
   outerLimit: number;
   currentPage: number;
@@ -23,6 +23,10 @@ export const generatePages = ({
   innerLimit,
   outerLimit,
 }: Arguments): number[] => {
+  if (!pagesQuantity) {
+    return [];
+  }
+
   const allPages = [...Array(pagesQuantity).keys()].map((page) => page + 1);
 
   if (!innerLimit || !outerLimit) return allPages;

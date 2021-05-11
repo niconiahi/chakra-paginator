@@ -11,7 +11,7 @@ export const Next: FC<ButtonProps> = ({ children, ...buttonProps }) => {
   // constants
   const { changePage } = actions;
   const { currentPage, pagesQuantity, isDisabled } = state;
-  const isLast = currentPage > pagesQuantity - 1;
+  const isLast = pagesQuantity ? currentPage > pagesQuantity - 1 : true;
 
   // handlers
   const handleNextClick = () => {

@@ -31,52 +31,104 @@ yarn add chakra-paginator
 ## Usage
 
 ```tsx
-import React, { FC, useState } from "react";
-import { ButtonProps, Button, Flex, ChakraProvider } from "@chakra-ui/react";
+import React, { FC, ChangeEvent, useEffect, useState, useMemo } from "react";
+import {
+  Grid,
+  Center,
+  Select,
+  ButtonProps,
+  Text,
+  Button,
+  ChakraProvider
+} from "@chakra-ui/react";
 import {
   Paginator,
+  Container,
   Previous,
   Next,
-  PageGroup,
-  Container,
+  PageGroup
 } from "chakra-paginator";
+
+const fetchPokemons = (pageSize: number, offset: number) => {
+  return fetch(
+    `https://pokeapi.co/api/v2/pokemon?limit=${pageSize}&offset=${offset}`
+  ).then((res) => res.json());
+};
 
 const Demo: FC = () => {
   // react hooks
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
+    undefined
+  );
+  const [pokemons, setPokemons] = useState<any[]>([]);
   const [isPaginatorDisabled, setIsPaginatorDisabled] = useState<boolean>(
     false
   );
 
   // constants
-  const pagesQuantity: Number = 20; // -> calculated or obtained from Backend
-  const outerLimit: Number = 2;
-  const innerLimit: Number = 2;
+  const outerLimit = 2;
+  const innerLimit = 2;
+
+  // memos
+  const offset = useMemo(() => {
+    return currentPage * pageSize - pageSize;
+  }, [currentPage, pageSize]);
+  const pagesQuantity = useMemo(() => {
+    if (!pokemonsTotal || !pageSize) {
+      return undefined;
+    }
+
+    return Math.ceil(pokemonsTotal / pageSize);
+  }, [pokemonsTotal, pageSize]);
+
+  // effects
+  useEffect(() => {
+    fetchPokemons(pageSize, offset).then((pokemons) => {
+      setPokemonsTotal(pokemons.count);
+      setPokemons(pokemons.results);
+    });
+  }, [currentPage, pageSize, offset]);
 
   // styles
   const baseStyles: ButtonProps = {
     w: 7,
-    fontSize: "sm",
+    fontSize: "sm"
   };
 
   const normalStyles: ButtonProps = {
     ...baseStyles,
-    bg: "red.300",
+    _hover: {
+      bg: "green.300"
+    },
+    bg: "red.300"
   };
 
   const activeStyles: ButtonProps = {
     ...baseStyles,
-    bg: "green.300",
+    _hover: {
+      bg: "blue.300"
+    },
+    bg: "green.300"
   };
 
   const separatorStyles: ButtonProps = {
     w: 7,
-    bg: "green.200",
+    bg: "green.200"
   };
 
   // handlers
   const handlePageChange = (nextPage: number) => {
     // -> request new data using the page number
-    console.log(nextPage);
+    setCurrentPage(nextPage);
+    console.log("request new data with ->", nextPage);
+  };
+
+  const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const pageSize = Number(event.target.value);
+
+    setPageSize(pageSize);
   };
 
   const handleDisableClick = () =>
@@ -88,6 +140,7 @@ const Demo: FC = () => {
         isDisabled={isPaginatorDisabled}
         activeStyles={activeStyles}
         innerLimit={innerLimit}
+        currentPage={currentPage}
         outerLimit={outerLimit}
         normalStyles={normalStyles}
         separatorStyles={separatorStyles}
@@ -95,22 +148,38 @@ const Demo: FC = () => {
         onPageChange={handlePageChange}
       >
         <Container align="center" justify="space-between" w="full" p={4}>
-          <Previous bg="green.300">
+          <Previous>
             Previous
             {/* Or an icon from `react-icons` */}
           </Previous>
           <PageGroup isInline align="center" />
-          <Next bg="green.300">
+          <Next>
             Next
             {/* Or an icon from `react-icons` */}
           </Next>
         </Container>
       </Paginator>
-      <Flex w="full" justify="center" align="center">
-        <Button ml={4} onClick={handleDisableClick}>
-          Disable ON / OFF
-        </Button>
-      </Flex>
+      <Center w="full">
+        <Button onClick={handleDisableClick}>Disable ON / OFF</Button>
+        <Select w={40} ml={3} onChange={handlePageSizeChange}>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </Select>
+      </Center>
+      <Grid
+        templateRows="repeat(2, 1fr)"
+        templateColumns="repeat(5, 1fr)"
+        gap={3}
+        px={20}
+        mt={20}
+      >
+        {pokemons?.map((pokemon) => (
+          <Center p={4} bg="green.100">
+            <Text>{pokemon.name}</Text>
+          </Center>
+        ))}
+      </Grid>
     </ChakraProvider>
   );
 };
