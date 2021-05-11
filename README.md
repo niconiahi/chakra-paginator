@@ -190,6 +190,8 @@ export default Demo;
 | total        | The total amount of items obtained from a Backend call | number       | 0       | no       |
 | initialState | Initial states for pagination values                   | InitialState |         | yes      |
 
+---
+
 ### Container
 
 - Container is a _Flex_ component, so any _FlexProps_ are accepted
