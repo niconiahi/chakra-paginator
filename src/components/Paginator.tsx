@@ -7,7 +7,7 @@ import { IconType } from "../lib/types";
 import { INITIAL_VALUES } from "../lib/constants";
 
 export type PaginatorProps = {
-  pagesQuantity: number;
+  pagesQuantity?: number;
   onPageChange: (page: number) => void;
   normalStyles?: ButtonProps;
   activeStyles?: ButtonProps;

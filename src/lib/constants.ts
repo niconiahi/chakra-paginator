@@ -1,5 +1,5 @@
 export const INITIAL_VALUES = {
-  pagesQuantity: 0,
+  pagesQuantity: undefined,
   currentPage: 1,
   normalStyles: {},
   separatorStyles: {},
