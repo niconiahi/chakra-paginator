@@ -4,7 +4,7 @@
 
 ## [![npm version](https://badge.fury.io/js/chakra-paginator.svg)](https://badge.fury.io/js/chakra-paginator)
 
----
+<br />
 
 ## Installation
 
@@ -20,17 +20,343 @@ npm i chakra-paginator
 yarn add chakra-paginator
 ```
 
----
+<br />
 
-## Demo
+## Demo with all options applied
 
 ## [Check it out in this Sandbox](https://codesandbox.io/s/chakra-paginator-demo-4n2gd)
 
----
+<br />
+
+## Components API
+
+<br />
+
+### Paginator
+
+| Prop            | Description                                                                                                                                                | Type                       | Default | Required |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ------- | -------- |
+| pagesQuantity   | The total number of pages, calculated based on Backend data                                                                                                | number                     | 0       | yes      |
+| onPageChange    | On change handler which returns the last selected page                                                                                                     | (nextPage: number) => void |         | yes      |
+| isDisabled      | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                    | false   | no       |
+| activeStyles    | The styles of the active page button                                                                                                                       | ButtonProps                | {}      | no       |
+| normalStyles    | The styles of the inactive page buttons                                                                                                                    | ButtonProps                | {}      | no       |
+| separatorStyles | The styles of the separator wrapper                                                                                                                        | ButtonProps                | {}      | no       |
+| outerLimit      | The amount of pages to show at the start and at the end                                                                                                    | number                     | 0       | no       |
+| innerLimit      | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                     | 0       | no       |
+| currentPage     | Manually set the _currentPage_ of the pagination                                                                                                           | number                     | 1       | no       |
+
+<br />
+
+### usePaginator
+
+<br />
+
+#### Options
+| Prop         | Description                                            | Type         | Default | Required |
+|--------------|--------------------------------------------------------|--------------|---------|----------|
+| total        | The total amount of items obtained from a Backend call | number       | 0       | no       |
+| initialState | Initial states for pagination values                   | InitialState |         | yes      |
+
+<br />
+
+#### Returned values
+| Prop           | Description                                                                                                                                                  | Type                                | Default | Required |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------|----------|
+| offset         | Generic offset value generated if pageSize is provided                                                                                                       | number                              | 0       | no       |
+| pagesQuantity  | Automatically calculated based on total and pageSize.  Keep in mind that you can pass this directly to Paginator.  This is a commodity if you know the total | number                              | 0       | no       |
+| currentPage    | The current page number                                                                                                                                      | number                              |         | yes      |
+| pageSize       | The amount of items per page                                                                                                                                 | number                              | 10      | no       |
+| isDisabled     | Disabled or enables all the pagination components                                                                                                            | boolean                             | false   | no       |
+| setPageSize    | A setter for the pageSize value                                                                                                                              | Dispatch<SetStateAction <number> >  |         | no       |
+| setIsDisabled  | A setter for the isDisabled value                                                                                                                            | Dispatch<SetStateAction <boolean> > |         | no       |
+| setCurrentPage | A setter for the currentPage value                                                                                                                           | Dispatch<SetStateAction <number> >  |         | yes      |
+
+<br />
+
+### Container
+
+```
+Container is a _Flex_ component, so any _FlexProps_ are accepted
+```
+
+<br />
+
+### PageGroup
+
+```
+PageGroup is a _Stack_ component, so any _StackProps_ are accepted
+```
+
+<br />
+
+### Previous
+
+```
+Previous is a _Button_ component, so any _ButtonProps_ are accepted
+```
+
+<br />
+
+### Next
+
+```
+Next is a _Button_ component, so any _ButtonProps_ are accepted
+```
+
+<br />
 
 ## Usage
 
+<br />
+
+### Minimal
+
+```
+This is the bare minimum set up you need to get it up and working
+```
+
 ```tsx
+import React, { FC, ChangeEvent, useEffect, useState } from "react";
+import { ChakraProvider } from "@chakra-ui/react";
+import {
+  Paginator,
+  Container,
+  Previous,
+  Next,
+  PageGroup,
+  usePaginator
+} from "chakra-paginator";
+
+const Demo: FC = () => {
+  const pagesQuantity = 12;
+  const { currentPage, setCurrentPage } = usePaginator({
+    initialState: { currentPage: 1 }
+  });
+
+  return (
+    <ChakraProvider>
+      <Paginator
+        pagesQuantity={pagesQuantity}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      >
+        <Container align="center" justify="space-between" w="full" p={4}>
+          <Previous>
+            Previous
+            {/* Or an icon from `react-icons` */}
+          </Previous>
+          <PageGroup isInline align="center" />
+          <Next>
+            Next
+            {/* Or an icon from `react-icons` */}
+          </Next>
+        </Container>
+      </Paginator>
+    </ChakraProvider>
+  );
+};
+
+export default Demo;
+```
+
+<br />
+
+```diff
++ From here on, the examples are only partial. You can think of them as modules you can add to the previous component
++ Merge them togheter and you would be adding the given functionality
+```
+
+<br />
+
+### Styling
+
+```
+Add styles to the possible components inside PageGroup
+
+First: the styles for the unselected and selected page buttons
+Second: the styles for the separator button
+```
+
+```tsx
+const normalStyles: ButtonProps = {
+  w: 7,
+  bg: "red.300"
+  fontSize: "sm"
+  _hover: {
+    bg: "green.300"
+  },
+};
+
+const activeStyles: ButtonProps = {
+  w: 7,
+  bg: "green.300"
+  fontSize: "sm"
+  _hover: {
+    bg: "blue.300"
+  },
+};
+
+const separatorStyles: ButtonProps = {
+  w: 7,
+  bg: "green.200"
+};
+
+<Paginator
+  activeStyles={activeStyles}
+  normalStyles={normalStyles}
+  separatorStyles={separatorStyles}
+>
+```
+
+<br />
+
+### Disabling
+
+```
+It's provided a commodity disable prop to disable/enable all your pagination components at once
+```
+
+```tsx
+const { isDisabled, setIsDisabled } = usePaginator({
+  initialState: { isDisabled: false }
+});
+
+const handleDisableClick = () => {
+  return setIsDisabled((oldState) => !oldState);
+};
+
+<Paginator
+  isDisabled={isDisabled}
+>
+```
+
+<br />
+
+### Page size
+
+```
+It's provided a commodity page size setter and getter
+```
+
+```tsx
+const { pageSize, setPageSize } = usePaginator({
+  initialState: { pageSize: 5 }
+});
+
+const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+  const pageSize = Number(event.target.value);
+
+  setPageSize(pageSize);
+};
+
+<Paginator
+  pageSize={pageSize}
+>
+```
+
+<br />
+
+### Limits
+
+```
+You can trim the ammount of pages you show by passing both limits at the same time
+You need to pass them both, otherwise no limits will be applied
+```
+
+```tsx
+const outerLimit = 2;
+const innerLimit = 2;
+
+<Paginator
+  outerLimit={outerLimit}
+  innerLimit={innerLimit}
+>
+```
+
+<br />
+
+### Offset
+
+```
+It's possible that the API for the pagination you are consuming works with a generic offset
+
+```
+
+```
+This is calculated with the next formula:
+
+[currentPage * pageSize - pageSize]
+
+currentPage === 1 && pageSize === 5 // offset = 0;
+currentPage === 2 && pageSize === 5 // offset = 5;
+currentPage === 3 && pageSize === 5 // offset = 10;
+```
+
+```tsx
+const outerLimit = 2;
+const innerLimit = 2;
+
+<Paginator
+  outerLimit={outerLimit}
+  innerLimit={innerLimit}
+>
+```
+
+<br />
+
+### Pages quantity
+
+```
+Keep in mind that if you know the total amount of items of the requested endpoint, which is not
+a strange thing to be returned, you can use that to generate the pages quantity value for you
+```
+
+```tsx
+const { pagesQuantity } = usePaginator({
+  total: 4021,
+});
+
+<Paginator
+  pagesQuantity={pagesQuantity}
+>
+```
+
+<br />
+
+### Full usage example
+
+```
+In this example you can see all the possible features provided by the library being applied
+to show 10 pokemons names, with the ability to play with the page size and disable state
+```
+
+```tsx
+import React, { FC, ChangeEvent, useEffect, useState } from "react";
+import {
+  Grid,
+  Center,
+  Select,
+  ButtonProps,
+  Text,
+  Button,
+  ChakraProvider
+} from "@chakra-ui/react";
+import {
+  Paginator,
+  Container,
+  Previous,
+  usePaginator,
+  Next,
+  PageGroup
+} from "chakra-paginator";
+
+const fetchPokemons = (pageSize: number, offset: number) => {
+  return fetch(
+    `https://pokeapi.co/api/v2/pokemon?limit=${pageSize}&offset=${offset}`
+  ).then((res) => res.json());
+};
+
 const Demo: FC = () => {
   // states
   const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
@@ -44,7 +370,7 @@ const Demo: FC = () => {
 
   const {
     pagesQuantity,
-    offset, // you may not need this one, of course, but it's available for you
+    offset, 
     currentPage,
     setCurrentPage,
     setIsDisabled,
@@ -164,52 +490,3 @@ const Demo: FC = () => {
 
 export default Demo;
 ```
-
----
-
-## Components API
-
-### Paginator
-
-| Prop            | Description                                                                                                                                                | Type                       | Default | Required |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ------- | -------- |
-| pagesQuantity   | The total number of pages, calculated based on Backend data                                                                                                | number                     | 0       | yes      |
-| onPageChange    | On change handler which returns the last selected page                                                                                                     | (nextPage: number) => void |         | yes      |
-| isDisabled      | Disables all of the pagination components. You can always disable each individual component via the isDisabled prop, as the components render HTML buttons | boolean                    | false   | no       |
-| activeStyles    | The styles of the active page button                                                                                                                       | ButtonProps                | {}      | no       |
-| normalStyles    | The styles of the inactive page buttons                                                                                                                    | ButtonProps                | {}      | no       |
-| separatorStyles | The styles of the separator wrapper                                                                                                                        | ButtonProps                | {}      | no       |
-| outerLimit      | The amount of pages to show at the start and at the end                                                                                                    | number                     | 0       | no       |
-| innerLimit      | The amount of pages to show from the _currentPage_ backwards and forward                                                                                   | number                     | 0       | no       |
-| currentPage     | Manually set the _currentPage_ of the pagination                                                                                                           | number                     | 1       | no       |
-
----
-### usePaginator
-| Prop         | Description                                            | Type         | Default | Required |
-|--------------|--------------------------------------------------------|--------------|---------|----------|
-| total        | The total amount of items obtained from a Backend call | number       | 0       | no       |
-| initialState | Initial states for pagination values                   | InitialState |         | yes      |
-
----
-
-### Container
-
-- Container is a _Flex_ component, so any _FlexProps_ are accepted
-
----
-
-### PageGroup
-
-- PageGroup is a _Stack_ component, so any _StackProps_ are accepted
-
----
-
-### Previous
-
-- Previous is a _Button_ component, so any _ButtonProps_ are accepted
-
----
-
-### Next
-
-- Next is a _Button_ component, so any _ButtonProps_ are accepted
