@@ -5,7 +5,6 @@
 - [Version](#version)
 - [Installation](#installation)
 - [Demo with all options applied](#demo-with-all-options-applied)
-- [Hooks](#hooks)
 - [Components API](#components-api)
   - [Paginator](#paginator)
   - [usePaginator](#usepaginator)
