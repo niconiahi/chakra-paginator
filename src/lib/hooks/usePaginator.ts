@@ -1,9 +1,9 @@
 import { Dispatch, useState, useMemo, SetStateAction } from "react";
 
 type InitialState = {
-  pageSize: number;
+  pageSize?: number;
   currentPage: number;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 };
 
 type UsePaginator = {
@@ -25,12 +25,12 @@ export const usePaginator = ({
   setCurrentPage: Dispatch<SetStateAction<number>>;
 } => {
   // states
-  const [pageSize, setPageSize] = useState<number>(initialState.pageSize);
+  const [pageSize, setPageSize] = useState<number>(initialState.pageSize ?? 10);
   const [currentPage, setCurrentPage] = useState<number>(
     initialState.currentPage
   );
   const [isDisabled, setIsDisabled] = useState<boolean>(
-    initialState.isDisabled
+    initialState.isDisabled ?? false
   );
 
   // memos
