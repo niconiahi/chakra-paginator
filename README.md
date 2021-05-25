@@ -1,5 +1,28 @@
 # Chakra paginator
 
+## Table of Contents
+
+- [Version](#version)
+- [Installation](#installation)
+- [Demo with all options applied](#demo-with-all-options-applied)
+- [Hooks](#hooks)
+- [Components API](#components-api)
+  - [Paginator](#paginator)
+  - [usePaginator](#usepaginator)
+  - [Container](#container)
+  - [PageGroup](#pagegroup)
+  - [Previous](#previous)
+  - [Next](#next)
+- [Usage](#usage)
+  - [Minimal](#minimal)
+  - [Styling](#styling)
+  - [Disabling](#disabling)
+  - [Page size](#page-size)
+  - [Limits](#limits)
+  - [Offset](#offset)
+  - [Pages quantity](#pages-quantity)
+  - [Full usage example](#full-usage-example)
+
 ## Version
 
 ## [![npm version](https://badge.fury.io/js/chakra-paginator.svg)](https://badge.fury.io/js/chakra-paginator)
