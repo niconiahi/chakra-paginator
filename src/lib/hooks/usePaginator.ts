@@ -25,7 +25,7 @@ export const usePaginator = ({
   setCurrentPage: Dispatch<SetStateAction<number>>;
 } => {
   // states
-  const [pageSize, setPageSize] = useState<number>(initialState.pageSize ?? 10);
+  const [pageSize, setPageSize] = useState<number>(initialState.pageSize ?? 0);
   const [currentPage, setCurrentPage] = useState<number>(
     initialState.currentPage
   );

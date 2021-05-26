@@ -301,8 +301,8 @@ const innerLimit = 2;
 ### Offset
 
 ```
-It's possible that the API for the pagination you are consuming works with a generic offset
-
+It's possible that the API for the pagination you are consuming works with an offset
+One it's calculated and provided for you using the pageSize and currentPage values
 ```
 
 ```
@@ -316,13 +316,13 @@ currentPage === 3 && pageSize === 5 // offset = 10;
 ```
 
 ```tsx
-const outerLimit = 2;
-const innerLimit = 2;
+const { offset } = usePaginator({
+  initialState: { pageSize: 5 }
+});
 
-<Paginator
-  outerLimit={outerLimit}
-  innerLimit={innerLimit}
->
+fetchUsingOffset(pageSize, offset).then((data) => {
+  // use data
+});
 ```
 
 <br />
@@ -337,6 +337,7 @@ a strange thing to be returned, you can use that to generate the pages quantity 
 ```tsx
 const { pagesQuantity } = usePaginator({
   total: 4021,
+  initialState: { pageSize: 5 }
 });
 
 <Paginator
