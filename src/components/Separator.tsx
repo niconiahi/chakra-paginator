@@ -26,7 +26,7 @@ export const Separator: FC<SeparatorProps> = ({
   // react hooks
   const { actions, state } = useContext(PaginatorContext);
   const { innerLimit, currentPage } = state;
-  const { setCurrentPage } = actions;
+  const { changePage } = actions;
 
   const pageToJump = useMemo(() => {
     if (separatorPosition === "left") return currentPage - innerLimit;
@@ -42,9 +42,9 @@ export const Separator: FC<SeparatorProps> = ({
     if (isDisabled) return;
 
     if (pageToJump) {
-      setCurrentPage(pageToJump);
+      changePage(pageToJump);
     }
-  }, [pageToJump, isDisabled, setCurrentPage]);
+  }, [pageToJump, isDisabled, changePage]);
 
   return (
     <Flex as="li">
