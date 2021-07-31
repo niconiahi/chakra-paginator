@@ -1,4 +1,7 @@
+
 # Chakra paginator
+
+## Deprecation notice: this package has been moved to [@ajna/pagination](https://www.npmjs.com/package/@ajna/pagination) 
 
 ## Table of Contents
 
