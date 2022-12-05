@@ -19,6 +19,7 @@ export type PaginatorProps = {
   hoverIconRight?: IconType;
   hoverIconLeft?: IconType;
   isDisabled?: boolean;
+  children?: ReactNode; // add this line
 };
 
 export const Paginator: FC<PaginatorProps> = ({
